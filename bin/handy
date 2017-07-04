@@ -1,0 +1,63 @@
+#!/usr/bin/python -i
+
+import sys
+import math
+#import IPython
+
+def __get_bitsize(number):
+    num = number
+    if num < 0:
+        num = -num
+    bitsize = 0
+    while num:
+        bitsize += 1
+        num >>= 1
+    return bitsize
+
+def __get_finite_repr_num(number):
+    bit_size_8 = 8 * (1 + __get_bitsize(number) / 8)
+    return number % (1 << bit_size_8)
+
+def __num_as_bytes(num):
+    bs = []
+    while num:
+        a_code = num%256
+        # visible part of ascii
+        if 0x20 <= a_code: # <= 0x7f:
+            bs.append(chr(num%256))
+        else:
+            bs.append('.')
+        num >>= 8
+
+    # reverse because we iterate from the least important bits
+    return ''.join(reversed(bs))
+
+def split(txt, prefix, by):
+    if not(len(sys.argv) >=2 and sys.argv[1] in ['-d','--divide']):
+        return txt
+
+    wp = txt[prefix:]
+    ret = []
+    while wp:
+        ret.append(wp[:by])
+        wp = wp[by:]
+    return txt[:prefix] + '.'.join(ret)
+
+
+def __format_number(num):
+    fnum = __get_finite_repr_num(num)
+
+    l = [ num, split(hex(fnum),2,2), split(oct(fnum),1,4), split(bin(fnum),2,8),
+          "'%s'"%(__num_as_bytes(fnum)) ]
+
+    return '  '.join(map(str, l))
+
+def __handy_display_hook(item):
+    if isinstance(item, (int, long)):
+        print __format_number(item)
+    else:
+        print repr(item)
+
+sys.displayhook = __handy_display_hook
+#IPython.core.hooks
+

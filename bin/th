@@ -1,0 +1,15 @@
+#!/bin/sh
+# because of th run from within mc
+unset MC_SID
+
+[ "$#" = '0' ] && term &
+
+while [ "$#" -ge 1 ] ; do 
+	if [ -d "$1" ] ; then
+		term -e cdshell "$1"   &
+	else
+		echo "Not a directory: '$1'. Skipping." >&2
+	fi
+
+	shift 1
+done 
