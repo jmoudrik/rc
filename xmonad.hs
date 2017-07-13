@@ -73,7 +73,7 @@ main = do
      , workspaces     = myWorkspaces  
     --, normalBorderColor = "#60A1AD"  
     --, focusedBorderColor = "#68e862"  
-     , borderWidth    = 1  
+     , borderWidth    = 2
     }`additionalKeys`  
      ([
 	 ((mod3Mask, xK_p), (spawn "dmenu_run -l 10 -sf yellow -nb black -fn terminus-12"))
