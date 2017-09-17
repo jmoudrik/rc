@@ -15,10 +15,8 @@ alias pdfgrep="pdfgrep -n"
 alias grep="grep --color=auto"
 alias txts="txts --color-always -R"
 
-alias ssh_tunel="ssh -D 127.0.0.1:10003 j2m -N -v"
+alias ssh_tunel="autossh -D 127.0.0.1:10003 j2m -N &"
 alias cdms="cd /home/jm/remote/afs/ms/u/m/moudj6am/"
-alias cdu="cd /home/jm/remote/WWW/vyuka/unix2017"
-alias cdp=". ~/bin/cdp.sh"
 
 alias seznam="ping www.seznam.cz"
 alias ls="ls -X --color=auto"
@@ -27,6 +25,12 @@ alias lt="ls -lt"
 alias gvim="gvim -p"
 alias vim="vim -p"
 alias vi="vim -p"
+
+alias gs="git status"
+alias gp="git pull"
+alias gd="git diff"
+alias gb="git branch"
+alias gg="git gui"
 
 #ulimit -c unlimited
 
