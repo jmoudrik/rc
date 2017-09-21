@@ -9,7 +9,7 @@ if [[ $- != *i* ]]; then
 fi
 
 alias umount_remote="fusermount -u /home/jm/remote"
-alias su="sudo -H bash"
+alias su="sudo bash"
 alias gk="gitk"
 alias gg="git gui"
 alias gp="git pull"
@@ -49,7 +49,7 @@ CYAN='\['$CYAN_RAW'\]'
 LCYAN_RAW='\033[1;36m'
 LCYAN='\['$LCYAN_RAW'\]'
 REDB_RAW='\033[1;31m'
-REDB='\['$RED_RAW'\]'
+REDB='\['$REDB_RAW'\]'
 RED_RAW='\033[0;31m'
 RED='\['$RED_RAW'\]'
 GREEN_RAW='\033[0;32m'
@@ -68,7 +68,7 @@ PURPLE_RAW='\033[0;35m'
 PURPLE='\['$PURPLE_RAW'\]'
 
 NICKCOLOR="$CYAN"
-[ "$(whoami)" = 'root' ] && NICKCOLOR="$RED"
+[ "$(whoami)" = 'root' ] && NICKCOLOR="$REDB"
 
 MASHINECOLOR="$YELLOW"
 
@@ -86,7 +86,7 @@ one () {
 }
 
 fixup_remote () {
-[ "$1" != "." ] && echo "$1" | sed 's/_BEHIND_/↓/;s/_AHEAD_/↑/'
+[ "$1" != "." ] && echo "$1" | sed 's/_NO_REMOTE_TRACKING_/ local/;s/_BEHIND_/↓/;s/_AHEAD_/↑/'
 }
 fixup_branch () {
 	echo "$1" | sed 's/^\(.\{20\}\)\(...\).*$/\1…/;s/^\(feature\|FEATURE\)/F/'
@@ -119,7 +119,7 @@ PS_STATS=''
 echo $TERM | grep "screen" >/dev/null && PS_STATS=" $PURPLE(screen)$PS_STATS"
 [ -n "$SSH_CLIENT" ] && PS_STATS=" $GREY(${CYAN}ssh from ${LCYAN}$(echo $SSH_CLIENT | sed 's/^\([^ ]*\) .*$/\1/')$GREY)$PS_STATS"
 
-export PS1="$NICKCOLOR\u $LCYAN\j$GREY${PS_STATS} $GREY[${LCYAN}\$(date +%k:%M:%S)$GREY] [$LCYAN\w$GREY]\$(ps_git)
+export PS1=" $NICKCOLOR\u $LCYAN\j$GREY${PS_STATS} $GREY[${LCYAN}\$(date +%k:%M:%S)$GREY] [$LCYAN\w$GREY]\$(ps_git)
 $GREY "'\$'" $DEF"
 
 # MC=''
