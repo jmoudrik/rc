@@ -10,6 +10,13 @@ fi
 
 alias umount_remote="fusermount -u /home/jm/remote"
 alias su="sudo -H bash"
+alias gk="gitk"
+alias gg="git gui"
+alias gp="git pull"
+alias gc="git checkout"
+alias gs="git status"
+alias gd="git diff"
+alias gb="git branch"
 alias cal="ncal -M"
 alias pdfgrep="pdfgrep -n"
 alias grep="grep --color=auto"
