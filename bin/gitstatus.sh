@@ -18,7 +18,7 @@ fi
 gitstatus=$( LC_ALL=C git status --untracked-files=${__GIT_PROMPT_SHOW_UNTRACKED_FILES:-all} --porcelain --branch )
 
 # if the status is fatal, exit now
-[[ "$?" -ne 0 ]] && exit 0
+[[ "$?" -ne 0 ]] && exit 1
 
 num_staged=0
 num_changed=0
