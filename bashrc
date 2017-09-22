@@ -90,7 +90,7 @@ one () {
 }
 
 fixup_remote () {
-[ "$1" != "." ] && echo "$1" | sed 's/_NO_REMOTE_TRACKING_/ local/;s/_BEHIND_/↓/;s/_AHEAD_/↑/'
+[ "$1" != "." ] && echo " $1" | sed 's/_NO_REMOTE_TRACKING_/ local/;s/_BEHIND_/↓/;s/_AHEAD_/↑/'
 }
 fixup_branch () {
 	echo "$1" | sed 's/^\(.\{20\}\)\(...\).*$/\1…/;s/^\(feature\|FEATURE\)/F/'
@@ -113,7 +113,7 @@ if [ "$?" -eq 0 ] ; then
 
 		branch="$(fixup_branch "$branch")"
 		remote="$(fixup_remote "$remote")"
-		echo -e " $GREY_RAW($CYAN_RAW$branch$remote $REDB_RAW$(both $num_conflicts "x")$GREENB_RAW$(both $num_staged "●")$RED_RAW$(both $num_changed "+")$GREY_RAW$(both $num_stashed "⚑")$GREENB_RAW$(one "$clean" ✔)$GREY_RAW$(both "$num_untracked" …)$GREY_RAW)"
+		echo -e " $GREY_RAW($CYAN_RAW$branch$PURPLE_RAW$remote $REDB_RAW$(both $num_conflicts "x")$GREENB_RAW$(both $num_staged "●")$RED_RAW$(both $num_changed "+")$GREY_RAW$(both $num_stashed "⚑")$GREENB_RAW$(one "$clean" ✔)$GREY_RAW$(both "$num_untracked" …)$GREY_RAW)"
 	}
 fi
 }
