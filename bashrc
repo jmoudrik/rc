@@ -99,7 +99,7 @@ fixup_remote () {
 [ "$1" != "." ] && echo " $1" | sed 's/_NO_REMOTE_TRACKING_/ local/;s/_BEHIND_/↓/;s/_AHEAD_/↑/'
 }
 fixup_branch () {
-	echo "$1" | sed 's/^\(.\{20\}\)\(...\).*$/\1…/;s/^\(feature\|FEATURE\)/F/'
+	echo "$1" | sed 's/_PREHASH_/#/;s/^\(.\{20\}\)\(...\).*$/\1…/;s/^\(feature\|FEATURE\)/F/'
 }
 
 ps_git () {
