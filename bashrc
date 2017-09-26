@@ -119,7 +119,9 @@ if [ "$?" -eq 0 ] ; then
 
 		branch="$(fixup_branch "$branch")"
 		remote="$(fixup_remote "$remote")"
-		echo -e " $GREY_RAW($CYAN_RAW$branch$PURPLE_RAW$remote $REDB_RAW$(both $num_conflicts "x")$GREENB_RAW$(both $num_staged "●")$RED_RAW$(both $num_changed "+")$GREY_RAW$(both $num_stashed "⚑")$GREENB_RAW$(one "$clean" ✔)$GREY_RAW$(both "$num_untracked" …)$GREY_RAW)"
+		#branch_symbol=$([ -n "$branch" ] && echo "𐌖 ")
+		branch_symbol=
+		echo -e " $GREY_RAW($PURPLE_RAW$branch_symbol$CYAN_RAW$branch$PURPLE_RAW$remote $REDB_RAW$(both $num_conflicts "x")$GREENB_RAW$(both $num_staged "●")$RED_RAW$(both $num_changed "+")$GREY_RAW$(both $num_stashed "⚑")$GREENB_RAW$(one "$clean" ✔)$GREY_RAW$(both "$num_untracked" …)$GREY_RAW)"
 	}
 fi
 }
