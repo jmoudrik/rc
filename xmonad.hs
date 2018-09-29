@@ -79,6 +79,7 @@ main = do
 	 ((mod3Mask, xK_p), (spawn "dmenu_run -l 10 -sf yellow -nb black -fn terminus-12"))
      , ((mod4Mask, xK_t), spawn "term")
      , ((mod4Mask, xK_c), spawn "google-chrome")
+     , ((mod4Mask, xK_f), spawn "firefox")
      , ((mod4Mask, xK_i), spawn "google-chrome --incognito")
      , ((mod4Mask, xK_l), spawn "xlinks2")
      , ((mod4Mask, xK_d), spawn "dillo")
