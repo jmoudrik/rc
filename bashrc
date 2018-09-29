@@ -8,6 +8,8 @@ if [[ $- != *i* ]]; then
 	return
 fi
 
+export LS_COLORS="$LS_COLORS:di=1;33:"
+
 alias umount_remote="fusermount -u /home/jm/remote"
 alias su="sudo bash"
 
