@@ -1,0 +1,6 @@
+#!/bin/sh
+#/usr/bin/urxvt -tn rxvt -sb +si +sk -fg green -font 'xft:Terminess Powerline:pixelsize=16' $@
+/usr/bin/urxvt -tn rxvt -sb +si +sk -fg green -bg black  -font terminus-16 $@
+#/usr/bin/urxvt -tn rxvt -sb +si +sk -fg green -font xft:terminesspowerline-16 $@
+#/usr/bin/uxterm -sl 65535 +si +sk -fg green -bg black -font terminus-16 $@
+#/usr/bin/uxterm +si +sk -fg green -bg black $@
