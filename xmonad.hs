@@ -32,7 +32,7 @@ myWorkspaces  = ["1:www","2","3","4","5","6","7","8","9:htop"]  ++ (map snd myEx
 myLayout = onWorkspaces ["9:htop"] nobordersLayout $ tiled1 ||| Mirror tiled1 ||| nobordersLayout ||| tabbedLayout ||| simpleFloat
 --myLayout = onWorkspaces ["9:htop"] nobordersLayout $ onWorkspaces ["1:www"] tabbedLayout $ tiled1 ||| Mirror tiled1 ||| nobordersLayout ||| tabbedLayout ||| simpleFloat
  where  
-  tiled1 = spacing 2 $ smartBorders $ Tall nmaster1 delta ratio  
+  tiled1 = spacing 1 $ smartBorders $ Tall nmaster1 delta ratio  
   --tiled2 = spacing 5 $ Tall nmaster2 delta ratio  
   nmaster1 = 1  
   nmaster2 = 2  
