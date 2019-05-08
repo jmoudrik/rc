@@ -19,13 +19,14 @@ alias gb="git branch"
 alias gc="git checkout"
 alias gd="git diff"
 alias gg="git gui"
+alias gh="git stash"
 alias gl="git log"
 alias gp="git pull"
 alias gs="git status"
-alias gu="git push"
-alias gh="git stash"
 alias gt="git commit"
+alias gu="git push"
 
+alias n='nnn'
 alias cal="ncal -M"
 alias pdfgrep="pdfgrep -n"
 alias grep="grep --color=auto"
@@ -41,12 +42,6 @@ alias lt="ls -lt"
 alias gvim="gvim -p"
 alias vim="vim -p"
 alias vi="vim -p"
-
-alias gs="git status"
-alias gp="git pull"
-alias gd="git diff"
-alias gb="git branch"
-alias gg="git gui"
 
 #ulimit -c unlimited
 
