@@ -1,6 +1,6 @@
 #!/bin/sh
 
-id=$(xinput  | grep "Synaptics TouchPad" | sed 's/^.*id=\([0-9]*\).*$/\1/')
+id=$(xinput  | grep "TouchPad" | sed 's/^.*id=\([0-9]*\).*$/\1/')
 
 [ -z "$id" ] && { echo "could not find touchpad" ; exit 1 ; }
 
