@@ -27,7 +27,6 @@ alias gt="git commit"
 alias gu="git push"
 
 alias xv='sxiv'
-alias n='nnn'
 alias cal="ncal -M"
 alias pdfgrep="pdfgrep -n"
 alias grep="grep --color=auto"
@@ -43,6 +42,9 @@ alias lt="ls -lt"
 alias gvim="gvim -p"
 alias vim="vim -p"
 alias vi="vim -p"
+
+export NNN_CONTEXT_COLORS='3333'
+alias n='nnn'
 
 #ulimit -c unlimited
 
