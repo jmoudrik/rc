@@ -165,16 +165,16 @@ set ffs=unix,dos,mac
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set swapfile
-set directory^=~/.vim/swap//
+"set swapfile
+"set directory^=~/.vim/swap//
 
 set writebackup
-set backupcopy=auto
+"set backupcopy=auto
 set backupdir^=~/.vim/backup//
 
 " persist the undo tree for each file
-set undofile
-set undodir^=~/.vim/undo//
+"set undofile
+"set undodir^=~/.vim/undo//
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
