@@ -31,6 +31,7 @@ alias cal="ncal -M"
 alias pdfgrep="pdfgrep -n"
 alias grep="grep --color=auto"
 alias txts="txts --color-always -R"
+alias num_stats='python3 -m jmpy.num_stats'
 
 alias ssh_tunel="autossh -D 127.0.0.1:10003 j2m -N &"
 alias cdms="cd /home/jm/remote/afs/ms/u/m/moudj6am/"
