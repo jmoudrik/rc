@@ -7,14 +7,22 @@ LIMIT=30
 BAT_PLAYED=
 
 while true ; do
-	BAT=$(acpi -bat 2>&1 | sed -n 's/.*Discharging, \([0-9]*\)%,.*/\1/p')
+	ACPI=$(acpi -bat 2>&1)
+	BAT=$(echo "$ACPI" | sed -n '/^Battery/s/^.*, \([0-9]*\)%.*$/\1/p')
+	ADAPT=$(echo "$ACPI" | sed -n 's/.*Adapter.*\(off\|on\)-line.*/\1/p')
 
-	[ -n "$BAT" ] && {
-	 	date --rfc-3339=sec
-		echo $BAT
+	#echo $ACPI
+	#echo $BAT
+	#echo $ADAPT
+
+	{
+		date --rfc-3339=sec
+		[ "$ADAPT" = "on" ] && STATE=charging || STATE=discharging
+
+		echo "$BAT $STATE"
 	} | tee -a "$FILE"
 
-	[ -n "$BAT" -a "$BAT" -le $LIMIT ] && {
+	[ "$ADAPT" = "off" ] && [ "$BAT" -le $LIMIT ] && {
 		[ -z "$BAT_PLAYED" ] && trumpeta
 		BAT_PLAYED="JO"
 	}
