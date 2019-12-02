@@ -40,7 +40,11 @@ alias seznam="ping www.seznam.cz"
 alias ls="ls -X --color=auto"
 alias ll="ls -l"
 alias lt="ls -lt"
-alias lth="ls -lt | head"
+
+lth () {
+	ls -lt "$@" | head
+}
+
 alias gvim="gvim -p"
 alias vim="vim -p"
 alias vi="vim -p"
