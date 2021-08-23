@@ -22,6 +22,7 @@ set guifont=Terminus\ 10
 "set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
 set laststatus=2
 
+"Plugin 'moorereason/vim-markdownfmt'
 "Bundle 'leafgarland/typescript-vim'
 "Bundle 'altercation/vim-colors-solarized'
 

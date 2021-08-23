@@ -41,18 +41,31 @@ alias ls="ls -X --color=auto"
 alias ll="ls -l"
 alias lt="ls -lt"
 
+alias jsp='python -m json.tool'
+alias strip="sed 's/^[[:space:]]*//;s/[[:space:]]*$//'"
+
+set completion-ignore-case on
+
+
 lth () {
 	ls -lt "$@" | head
+}
+
+box () {
+	echo "#######################################"
+	echo "# ""$@"
+	echo "#######################################"
 }
 
 alias gvim="gvim -p"
 alias vim="vim -p"
 alias vi="vim -p"
+alias parallel="parallel --citation"
 
 export NNN_CONTEXT_COLORS='3333'
 alias n='nnn'
 
-#ulimit -c unlimited
+ulimit -c unlimited
 
 export HISTSIZE=-1
 export HISTFILESIZE=-1

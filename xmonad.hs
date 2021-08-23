@@ -15,7 +15,7 @@ import XMonad.Actions.MouseResize
 import XMonad.Layout.WindowArranger
 
 --import XMonad.Layout.IM  
---import XMonad.Layout.Grid  
+import XMonad.Layout.Grid  
 import XMonad.Layout.Tabbed
 import XMonad.Layout.SimpleFloat
 import XMonad.Actions.CycleWS
@@ -29,10 +29,10 @@ import System.IO
 myExtraWorkspaces = [(xK_0, "0"),(xK_minus, "-"),(xK_equal, "=")]
 myWorkspaces  = ["1:www","2","3","4","5","6","7","8","9:htop"]  ++ (map snd myExtraWorkspaces)
 
-myLayout = onWorkspaces ["9:htop"] nobordersLayout $ tiled1 ||| Mirror tiled1 ||| nobordersLayout ||| tabbedLayout ||| simpleFloat
+myLayout = onWorkspaces ["9:htop"] nobordersLayout $ tiled1 ||| Mirror tiled1 ||| nobordersLayout ||| gridLayout -- ||| tabbedLayout ||| simpleFloat 
 --myLayout = onWorkspaces ["9:htop"] nobordersLayout $ onWorkspaces ["1:www"] tabbedLayout $ tiled1 ||| Mirror tiled1 ||| nobordersLayout ||| tabbedLayout ||| simpleFloat
  where  
-  tiled1 = spacing 2 $ smartBorders $ Tall nmaster1 delta ratio  
+  tiled1 = spacing 0 $ smartBorders $ Tall nmaster1 delta ratio  
   --tiled2 = spacing 5 $ Tall nmaster2 delta ratio  
   nmaster1 = 1  
   nmaster2 = 2  
@@ -40,7 +40,7 @@ myLayout = onWorkspaces ["9:htop"] nobordersLayout $ tiled1 ||| Mirror tiled1 ||
   delta = 3/100  
   nobordersLayout = smartBorders $ Full  
   tabbedLayout = smartBorders $ simpleTabbed 
-  -- gridLayout = spacing 8 $ Grid
+  gridLayout = spacing 0 $ Grid
   -- gimpLayout = withIM (0.20) (Role "gimp-toolbox") $ reflectHoriz $ withIM (0.20) (Role "gimp-dock") Full  
   -- pidginLayout = withIM (18/100) (Role "buddy_list") gridLayout
 
