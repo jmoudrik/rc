@@ -29,7 +29,7 @@ import System.IO
 myExtraWorkspaces = [(xK_0, "0"),(xK_minus, "-"),(xK_equal, "=")]
 myWorkspaces  = ["1:www","2","3","4","5","6","7","8","9:htop"]  ++ (map snd myExtraWorkspaces)
 
-myLayout = onWorkspaces ["9:htop"] nobordersLayout $ tiled1 ||| Mirror tiled1 ||| nobordersLayout ||| gridLayout -- ||| tabbedLayout ||| simpleFloat 
+myLayout = onWorkspaces ["9:htop"] nobordersLayout $ tiled1 ||| Mirror tiled1 ||| tabbedLayout ||| gridLayout -- ||| tabbedLayout ||| nobordersLayout ||| simpleFloat 
 --myLayout = onWorkspaces ["9:htop"] nobordersLayout $ onWorkspaces ["1:www"] tabbedLayout $ tiled1 ||| Mirror tiled1 ||| nobordersLayout ||| tabbedLayout ||| simpleFloat
  where  
   tiled1 = spacing 0 $ smartBorders $ Tall nmaster1 delta ratio  
@@ -53,6 +53,7 @@ myManageHook = composeAll
 	 isFullscreen --> doFullFloat
      , title =? "htopterm" --> doShift "9:htop"  
      ]
+
 main = do  
   xmproc <- spawnPipe "/usr/bin/xmobar /home/jm/.xmonad/xmobarrc.hs"  
   --xmproc <- spawnPipe "/usr/bin/xmobar /home/jm/.xmonad/xmobarrc2.hs"  
@@ -61,13 +62,14 @@ main = do
     {
   	modMask = mod3Mask
 	, manageHook = manageDocks <+> myManageHook <+> manageHook defaultConfig  
-    --, layoutHook = avoidStrutsOn [U] $ myLayoutTab
-    , layoutHook = avoidStrutsOn [U] $ myLayout
+    --, layoutHook = avoidStrutsOn [U] $ myLayout
+    , layoutHook = avoidStruts $ layoutHook defaultConfig
+	, handleEventHook = handleEventHook defaultConfig <+> docksEventHook
     , logHook = dynamicLogWithPP xmobarPP  
             { ppOutput = hPutStrLn xmproc  
             , ppTitle = xmobarColor "#2CE3FF" "" . shorten 70  
                , ppLayout = const "" -- to disable the layout info on xmobar  
-            }  
+            }
     , startupHook = setWMName "LG3D"
     --, modMask = mod4Mask  
      , workspaces     = myWorkspaces  
@@ -80,13 +82,15 @@ main = do
      , ((mod4Mask, xK_t), spawn "term")
      , ((mod4Mask, xK_c), spawn "google-chrome")
      , ((mod4Mask, xK_f), spawn "firefox")
-     , ((mod4Mask, xK_i), spawn "google-chrome --incognito")
+     --, ((mod4Mask, xK_i), spawn "google-chrome --incognito")
      , ((mod4Mask, xK_l), spawn "xlinks2")
-     , ((mod4Mask, xK_d), spawn "dillo")
+     --, ((mod4Mask, xK_d), spawn "dillo")
      , ((mod3Mask, xK_c), kill)
      , ((0, xF86XK_AudioLowerVolume), spawn "amixer set Master 3%-")
      , ((0, xF86XK_AudioRaiseVolume), spawn "amixer set Master 3%+")
      , ((0, xF86XK_AudioMute), spawn "audio_toggle")
+     , ((0, xF86XK_MonBrightnessUp), spawn "lxqt-config-brightness -i")
+     , ((0, xF86XK_MonBrightnessDown), spawn "lxqt-config-brightness -d")
 
      -- xF86XK_AudioMicMute to neumi...
      , ((0, 0x1008ffb2), spawn "amixer set Capture toggle")
