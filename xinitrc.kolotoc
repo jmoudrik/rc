@@ -3,27 +3,27 @@
 #  MISC
 #
 pepovo_rozlozeni
-touchpad_toggle
+#touchpad_toggle
 
 #
 #  WM
 #
 
-trayer --edge top --align left --SetDockType true --SetPartialStrut true --expand true --width 12 --transparent true --alpha 0 --tint 0x000000 --height 16 &
+trayer --edge top --align left --SetDockType true --SetPartialStrut true --expand true --width 6 --transparent true --alpha 255 --tint 0x000000 --height 20 &
 feh --bg-scale ~/obrazky/Best-Cat-Wallpaper.jpg &
-
 #feh --bg-scale ~/obrazky/jumping-fox-HD.jpg &
 
 #
 #  APPS
 #
-wicd-client -t &
-#nm-applet &
+#wicd-client -t &
+nm-applet &
+lxqt-powermanagement &
 redshift-gtk &
 htopterm &
 #deluge &
-autossh -D 127.0.0.1:10003 j2m -N &
-xscreensaver -no-splash &
+#autossh -D 127.0.0.1:10003 j2m -N &
+#xscreensaver -no-splash &
 
 #
 #  RUN
