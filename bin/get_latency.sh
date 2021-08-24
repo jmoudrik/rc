@@ -5,7 +5,7 @@ J2M=37.205.9.130
 TARGET=j2m.cz
 
 
-OUT="$(ping -c 1 -w 1 $TARGET)"
+OUT="$(ping -c 1 -w 1 $J2M)"
 
 RETCODE=$?
 

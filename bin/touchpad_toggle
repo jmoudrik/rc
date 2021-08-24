@@ -1,10 +1,10 @@
 #!/bin/sh
 
-id=$(xinput  | grep "TouchPad" | sed 's/^.*id=\([0-9]*\).*$/\1/')
+id=$(xinput  | grep "Touch[pP]ad" | sed 's/^.*id=\([0-9]*\).*$/\1/')
 
 [ -z "$id" ] && { echo "could not find touchpad" ; exit 1 ; }
 
-state=$(xinput list-props $id | grep Enabled | sed 's/.*\([01]\)$/\1/')
+state=$(xinput list-props $id | grep 'Device Enabled' | sed 's/.*\([01]\)$/\1/')
 
 new_state=$(( 1 - $state ))
 
