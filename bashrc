@@ -48,7 +48,7 @@ set completion-ignore-case on
 
 
 lth () {
-	ls -lt "$@" | head
+	ls -lt "$@" | head -n 20
 }
 
 box () {

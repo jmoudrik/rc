@@ -15,7 +15,7 @@ filetype off
 " Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 " pozor, musel jsem nainstalovat patched font z
 " https://github.com/powerline/fonts.git
-set guifont=Terminus\ 10
+set guifont=Terminus\ \(TTF\)\ Medium\ 15
 "set guifont=Terminess\ Powerline\ 10
 "set guifont=Terminus\ for\ Powerline\ 10 
 " Always show the status line
