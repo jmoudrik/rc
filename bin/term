@@ -1,6 +1,10 @@
 #!/bin/sh
-#/usr/bin/urxvt -tn rxvt -sb +si +sk -fg green -font 'xft:Terminess Powerline:pixelsize=16' $@
-/usr/bin/urxvt -tn rxvt -sb +si +sk -fg green -bg black  -font terminus-16 $@
-#/usr/bin/urxvt -tn rxvt -sb +si +sk -fg green -font xft:terminesspowerline-16 $@
+# tohle byl muj default, ale protoze jsem nebyl schopnej rozbehnout ikony, tak switchuju na
+# gnome terminal
+#/usr/bin/urxvt -sb +si +sk -fg green -bg black  -font 'xft:Terminus (TTF)' $@
 #/usr/bin/uxterm -sl 65535 +si +sk -fg green -bg black -font terminus-16 $@
 #/usr/bin/uxterm +si +sk -fg green -bg black $@
+
+
+gnome-terminal
+
