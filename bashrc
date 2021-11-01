@@ -70,6 +70,9 @@ ulimit -c unlimited
 export HISTSIZE=-1
 export HISTFILESIZE=-1
 
+export NNN_FCOLORS='c1e2272e006033f7c6d6abc4'
+export NNN_COLORS='#b9cb2c45'
+
 LGREY='\[\033[1;37m\]'
 GREY_RAW='\033[0;37m'
 GREY='\['$GREY_RAW'\]'
