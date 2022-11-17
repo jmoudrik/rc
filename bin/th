@@ -6,7 +6,7 @@ unset MC_SID
 
 while [ "$#" -ge 1 ] ; do 
 	if [ -d "$1" ] ; then
-		term -e cdshell "$1"   &
+		term --working-directory "$(realpath "$1")"
 	else
 		echo "Not a directory: '$1'. Skipping." >&2
 	fi

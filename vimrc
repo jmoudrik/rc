@@ -5,13 +5,24 @@
 set nocompatible
 filetype off
 
+" JM vimplug
+call plug#begin()
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'chmp/mdnav'
+Plug 'scrooloose/nerdtree'
+call plug#end()
+
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
+
+map <F2> :NERDTreeToggle<CR>
+
 "set rtp+=~/.vim/bundle/vundle/
 "call vundle#rc()
 
 " let Vundle manage Vundle
 " required! 
 " Bundle 'gmarik/vundle'
-
 " Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 " pozor, musel jsem nainstalovat patched font z
 " https://github.com/powerline/fonts.git
@@ -23,11 +34,8 @@ set guifont=Terminus\ \(TTF\)\ Medium\ 15
 set laststatus=2
 
 "Plugin 'moorereason/vim-markdownfmt'
-"Bundle 'leafgarland/typescript-vim'
 "Bundle 'altercation/vim-colors-solarized'
 
-"Bundle 'scrooloose/nerdtree'
-"map <F2> :NERDTreeToggle<CR>
 " NERDTress File highlighting
 "
 "Bundle 'klen/python-mode'
@@ -181,7 +189,8 @@ set backupdir^=~/.vim/backup//
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Use spaces instead of tabs
+set tabstop=4
+set shiftwidth=4
 
 " Be smart when using tabs ;)
 set smarttab
@@ -190,10 +199,6 @@ set smarttab
 autocmd Filetype python setlocal expandtab
 
 autocmd BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
-
-
-set tabstop=4
-set shiftwidth=4
 
 " number the lines
 set nu
@@ -329,85 +334,13 @@ autocmd BufWrite *.py :call DeleteTrailingWS()
 " Pressing ,ss will toggle and untoggle spell checking
 map <leader>ss :setlocal spell!<cr>
 
-" Shortcuts using <leader>
+"n Shortcuts using <leader>
 "map <leader>sn ]s
 "map <leader>sp [s
 "map <leader>sa zg
 "map <leader>s? z=
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Misc
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Remove the Windows ^M - when the encodings gets messed up
-"noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
-
-" Quickly open a buffer for scripbble
-"map <leader>q :e ~/buffer<cr>
-
-" Toggle paste mode on and off
-"map <leader>pp :setlocal paste!<cr>
-
-augroup vimrc_autocmds
-    autocmd!
-    " highlight characters past column 120
-    autocmd FileType python highlight Excess ctermbg=DarkGrey guibg=Black
-    autocmd FileType python match Excess /\%120v.*/
-    autocmd FileType python set nowrap
-    augroup END
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Helper functions
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"function! CmdLine(str)
-"    exe "menu Foo.Bar :" . a:str
-"    emenu Foo.Bar
-"    unmenu Foo
-"endfunction
-"
-"function! VisualSelection(direction) range
-"    let l:saved_reg = @"
-"    execute "normal! vgvy"
-"
-"    let l:pattern = escape(@", '\\/.*$^~[]')
-"    let l:pattern = substitute(l:pattern, "\n$", "", "")
-"
-"    if a:direction == 'b'
-"        execute "normal ?" . l:pattern . "^M"
-"    elseif a:direction == 'gv'
-"        call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.')
-"    elseif a:direction == 'replace'
-"        call CmdLine("%s" . '/'. l:pattern . '/')
-"    elseif a:direction == 'f'
-"        execute "normal /" . l:pattern . "^M"
-"    endif
-"
-"    let @/ = l:pattern
-"    let @" = l:saved_reg
-"endfunction
-
-
-" Don't close window, when deleting a buffer
-"command! Bclose call <SID>BufcloseCloseIt()
-"function! <SID>BufcloseCloseIt()
-"   let l:currentBufNum = bufnr("%")
-"   let l:alternateBufNum = bufnr("#")
-"
-"   if buflisted(l:alternateBufNum)
-"     buffer #
-"   else
-"     bnext
-"   endif
-"
-"   if bufnr("%") == l:currentBufNum
-"     new
-"   endif
-"
-"   if buflisted(l:currentBufNum)
-"     execute("bdelete! ".l:currentBufNum)
-"   endif
-"endfunction
 
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
  exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg

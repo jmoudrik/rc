@@ -61,19 +61,20 @@ alias gvim="gvim -p"
 alias vim="vim -p"
 alias vi="vim -p"
 alias parallel="parallel --citation"
-
-export NNN_CONTEXT_COLORS='3333'
-alias nnn='nnn -RdE'
+alias mc='n'
 
 ulimit -c unlimited
 
 export HISTSIZE=-1
 export HISTFILESIZE=-1
 
+alias nnn='nnn -RdE'
+export NNN_OPENER="batcat --paging always"
+export NNN_CONTEXT_COLORS='3333'
 export NNN_FCOLORS='c1e2272e006033f7c6d6abc4'
 export NNN_COLORS='#b9cb2c45'
 export NNN_FIFO="/tmp/nnn.fifo"
-export NNN_PLUG='d:jm_diffs;i:imgview;o:fzcd;z:z_autojump;h:fzhist;p:preview-tui'
+export NNN_PLUG='t:!th;d:jm_diffs;i:imgview;c:jm_fzcd;z:jm_autojump;h:fzhist;p:preview-tui'
 
 n ()
 {
@@ -103,6 +104,7 @@ n ()
             rm -f "$NNN_TMPFILE" > /dev/null
     fi
 }
+
 
 
 LGREY='\[\033[1;37m\]'
@@ -176,7 +178,7 @@ if [ "$?" -eq 0 ] ; then
 		remote="$(fixup_remote "$remote")"
 		#branch_symbol=$([ -n "$branch" ] && echo "𐌖 ")
 		branch_symbol=
-		echo -e " $GREY_RAW($PURPLE_RAW$branch_symbol$CYAN_RAW$branch$PURPLE_RAW$remote $REDB_RAW$(both $num_conflicts "x")$GREENB_RAW$(both $num_staged "●")$RED_RAW$(both $num_changed "+")$GREY_RAW$(both $num_stashed "⚑")$GREENB_RAW$(one "$clean" ✔)$GREY_RAW$(both "$num_untracked" …)$GREY_RAW)"
+		echo -e " $GREY_RAW($PURPLE_RAW$branch_symbol$CYAN_RAW$branch$PURPLE_RAW$remote $REDB_RAW$(both $num_conflicts "x")$GREENB_RAW$(both $num_staged "●")$RED_RAW$(both $num_changed "+")$GREY_RAW$(both $num_stashed "⚑ ")$GREENB_RAW$(one "$clean" ✔)$GREY_RAW$(both "$num_untracked" …)$GREY_RAW)"
 	}
 fi
 }

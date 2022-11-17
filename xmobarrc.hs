@@ -1,7 +1,7 @@
-Config { --font = "xft:Bitstream Vera Sans Mono:size=9:bold:antialias=true"
-    font = "xft:Terminus:size=14:antialias=true"
+Config { font = "xft:Terminus:size=14:antialias=true"
      , bgColor = "#000000"
      , fgColor = "grey"
+	 , lowerOnStart = True
      --, position = Static { xpos = 200 , ypos = 0, width = 1400, height = 20 }
      , position = TopW R 90
      , commands = [ 

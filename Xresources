@@ -1,0 +1,7 @@
+URxvt.termname: rxvt-unicode
+URxvt.background: black
+URxvt.foreground: green
+URxvt.font: xft:Terminus (TTF)
+URxvt.scrollBar: false
+URxvt.scrollTtyOutput: true
+URxvt.scrollTtyKeypress: true
