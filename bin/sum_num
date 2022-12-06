@@ -1,0 +1,21 @@
+#!/bin/dash
+
+[ "$1" = '-h' -o "$1" = '--help' ] && {
+cat <<EOF
+Usage: $0 [OPTION]
+
+Sums numbers read from stdin.
+
+OPTION
+  -p per_lines           Outputs partial sums after each \`per_lines\' lines.
+EOF
+exit
+}
+
+if [ "$1" = '-p' ] ; then
+	per_lines=1000
+	[ -n "$2" -a "$2" -gt 0 ] 2>/dev/null && per_lines="$2" || echo "per_lines: using default value $per_lines" >&2
+	awk "{LINE += 1; SUM += \$1;  if( LINE % $per_lines == 0 ) print LINE, SUM } END { print SUM }"
+else
+	awk '{ SUM += $1} END { print SUM }'
+fi

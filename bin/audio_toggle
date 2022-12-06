@@ -1,0 +1,14 @@
+#!/bin/sh
+
+get_state () {
+	amixer get "$1" | egrep 'Playback.*?\[o' | egrep -o '\[o.+\]' | sort | tail -n 1
+}
+
+if [ $(get_state Master) = '[on]' ]; then
+    amixer set Master mute
+else
+    amixer set Master unmute
+
+	get_state Speaker | grep off && { amixer set Speaker unmute ; }
+	get_state Headphone | grep off && { amixer set Headphone unmute ; }
+fi

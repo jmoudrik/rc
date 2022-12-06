@@ -10,7 +10,8 @@ call plug#begin()
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'chmp/mdnav'
-Plug 'scrooloose/nerdtree'
+Plug 'preservim/nerdtree'
+Plug 'PhilRunninger/nerdtree-buffer-ops'
 call plug#end()
 
 autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact

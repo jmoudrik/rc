@@ -68,8 +68,9 @@ ulimit -c unlimited
 export HISTSIZE=-1
 export HISTFILESIZE=-1
 
-alias nnn='nnn -RdE'
-export NNN_OPENER="batcat --paging always"
+alias nnn='nnn -cRdE'
+#export NNN_OPENER="batcat --paging always"
+export NNN_OPENER="/home/jm/.config/nnn/plugins/jm_open"
 export NNN_CONTEXT_COLORS='3333'
 export NNN_FCOLORS='c1e2272e006033f7c6d6abc4'
 export NNN_COLORS='#b9cb2c45'

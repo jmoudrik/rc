@@ -3,7 +3,7 @@ Config { font = "xft:Terminus:size=14:antialias=true"
      , fgColor = "grey"
 	 , lowerOnStart = True
      --, position = Static { xpos = 200 , ypos = 0, width = 1400, height = 20 }
-     , position = TopW R 90
+     , position = TopW R 88 
      , commands = [ 
              Run Cpu ["-L","3","-H","50","--normal","green","--high","red", "-t", "<total>%"] 10 
              , Run Memory ["-t","<fc=green><usedratio></fc>%"] 10
