@@ -7,64 +7,95 @@ filetype off
 
 " JM vimplug
 call plug#begin()
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
-Plug 'chmp/mdnav'
-Plug 'preservim/nerdtree'
-Plug 'PhilRunninger/nerdtree-buffer-ops'
+" driv ve starym vimu
+"Plug 'leafgarland/typescript-vim'
+"Plug 'peitalin/vim-jsx-typescript'
+"Plug 'chmp/mdnav'
+"Plug 'preservim/nerdtree'
+"Plug 'PhilRunninger/nerdtree-buffer-ops'
+"
+Plug 'nvim-lua/plenary.nvim'
+Plug 'neovim/nvim-lspconfig'
+
+
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
+
+"" debug lsp
+""Plug 'mfussenegger/nvim-dap'
+
+Plug 'windwp/nvim-autopairs'
+Plug 'p00f/nvim-ts-rainbow'
+
+" info o radkach vedle linenum
+Plug 'airblade/vim-gitgutter'
+
+Plug 'jose-elias-alvarez/null-ls.nvim'
+Plug 'nvim-telescope/telescope.nvim', {'tag':'0.1.1'}
+Plug 'nvim-telescope/telescope-live-grep-args.nvim'
+
+"" zarovka na code actions
+Plug 'kosayoda/nvim-lightbulb'
+Plug 'antoinemadec/FixCursorHold.nvim'
+
+Plug 'EdenEast/nightfox.nvim'
+Plug 'sainnhe/sonokai'
+"
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'mrjones2014/nvim-ts-rainbow'
+Plug 'nvim-treesitter/nvim-treesitter-context'
+Plug 'windwp/nvim-ts-autotag'
+Plug 'm-demare/hlargs.nvim'
+Plug 'folke/twilight.nvim'
+
+Plug 'MunifTanjim/eslint.nvim'
+Plug 'nvim-tree/nvim-web-devicons'
+Plug 'folke/trouble.nvim'
+
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'nvim-tree/nvim-tree.lua'
+
+Plug 'sindrets/diffview.nvim'
+"" sracka nejaka?
+Plug 'romgrk/barbar.nvim'
+
+Plug 'kylechui/nvim-surround'
+
+" autocomplete
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
+
+
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
-autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
 
-map <F2> :NERDTreeToggle<CR>
+let g:gitgutter_enabled = 1
 
-"set rtp+=~/.vim/bundle/vundle/
-"call vundle#rc()
+"" JM OUT
+""autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
 
-" let Vundle manage Vundle
-" required! 
-" Bundle 'gmarik/vundle'
-" Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+"map <F2> :NERDTreeToggle<CR>
+map <F2> :NvimTreeToggle<CR>
+
 " pozor, musel jsem nainstalovat patched font z
 " https://github.com/powerline/fonts.git
-set guifont=Terminus\ \(TTF\)\ Medium\ 15
+" JM 2023 neovim - mam proste o ikony opatchovany nerdfont terminess v
+" terminalu a nepouzivam vubec gui
+" tohle (nasledujici line) bylo predtim
+"set guifont=Terminus\ \(TTF\)\ Medium\ 15
 "set guifont=Terminess\ Powerline\ 10
 "set guifont=Terminus\ for\ Powerline\ 10 
 " Always show the status line
 "set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
-set laststatus=2
-
-"Plugin 'moorereason/vim-markdownfmt'
-"Bundle 'altercation/vim-colors-solarized'
-
-" NERDTress File highlighting
-"
-"Bundle 'klen/python-mode'
-"let g:pymode_rope = 0
-"" Documentation
-"let g:pymode_doc = 1
-"let g:pymode_doc_key = 'K'
-""Linting
-"let g:pymode_lint = 0
-"let g:pymode_lint_checker = "pyflakes,pep8"
-"" Auto check on save
-"let g:pymode_lint_write = 0
-"" Support virtualenv
-"let g:pymode_virtualenv = 1
-"" Enable breakpoints plugin
-"let g:pymode_breakpoint = 1
-"let g:pymode_breakpoint_bind = '<leader>b'
-"let g:pymode_breakpoint_cmd = 'import ipdb; ipdb.set_trace()  # XXX BREAKPOINT'
-"
-"
-"" syntax highlighting
-"let g:pymode_syntax = 1
-"let g:pymode_syntax_all = 1
-"let g:pymode_syntax_indent_errors = g:pymode_syntax_all
-"let g:pymode_syntax_space_errors = g:pymode_syntax_all
-"" Don't autofold code
-"let g:pymode_folding = 0
-"
+"JM OUT
+"set laststatus=2
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -83,33 +114,34 @@ set autoread
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
 let mapleader = ","
-"let g:mapleader = ","
 
 " Fast saving
 nmap <leader>w :w!<cr>
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => VIM user interface
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <leader>q :q!<cr>
+nmap <leader>Q :qall!<cr>
+nmap <C-PageDown> :tabn<cr>
+nmap <C-PageUp> :tabp<cr>
 
 " Pepa pridal: kvuli kontext menu pro spell
-set mousemodel=popup
+" JM ted rozbity s neovimem
+" set mousemodel=popup
 
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
 
 " Turn on the WiLd menu
-set wildmenu
+"set wildmenu
 
 " Ignore compiled files
-set wildignore=*.o,*~,*.pyc
+" JM OUT
+"set wildignore=*.o,*~,*.pyc
 
 "Always show current position
 set ruler
 
 " Height of the command bar
-set cmdheight=2
+" JM OUT
+"set cmdheight=2
 
 " A buffer becomes hidden when it is abandoned
 "set hid
@@ -144,8 +176,9 @@ set mat=2
 " No annoying sound on errors
 set noerrorbells
 "set novisualbell
-set t_vb=
-set tm=500
+" JM OUT
+"set t_vb=
+"set tm=500
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -154,8 +187,9 @@ set tm=500
 " Enable syntax highlighting
 syntax enable
 set background=dark
-colorscheme desert
-"colorscheme solarized
+colorscheme sonokai
+"colorscheme desert
+"hi Comment	guifg=SkyBlue
 
 " Set extra options when running in GUI mode
 if has("gui_running")
@@ -191,6 +225,7 @@ set backupdir^=~/.vim/backup//
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set tabstop=4
+
 set shiftwidth=4
 
 " Be smart when using tabs ;)
@@ -198,6 +233,7 @@ set smarttab
 
 " 1 tab == 4 spaces
 autocmd Filetype python setlocal expandtab
+autocmd Filetype json setlocal ts=2 sw=2 expandtab
 
 autocmd BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 
@@ -218,8 +254,8 @@ set wrap "Wrap lines
 """"""""""""""""""""""""""""""
 " Visual mode pressing * or # searches for the current selection
 " Super useful! From an idea by Michael Naumann
-vnoremap <silent> * :call VisualSelection('f')<CR>
-vnoremap <silent> # :call VisualSelection('b')<CR>
+"vnoremap <silent> * :call VisualSelection('f')<CR>
+"vnoremap <silent> # :call VisualSelection('b')<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -263,7 +299,8 @@ map <leader>tm :tabmove
 map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 
 " Switch CWD to the directory of the open buffer
-map <leader>cd :cd %:p:h<cr>:pwd<cr>
+" JM OUT
+"map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " Specify the behavior when switching between buffers 
 try
@@ -342,48 +379,48 @@ map <leader>ss :setlocal spell!<cr>
 "map <leader>s? z=
 
 
-
-function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
- exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
- exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
-endfunction
-
-" dokumenty
-au VimEnter *  call NERDTreeHighlightFile('doc', 'Red', 'none', '#ffa500', '#151515')
-au VimEnter *  call NERDTreeHighlightFile('docx', 'Red', 'none', '#ffa500', '#151515')
-au VimEnter *  call NERDTreeHighlightFile('pdf', 'Red', 'none', '#ffa500', '#151515')
-au VimEnter *  call NERDTreeHighlightFile('odt', 'Red', 'none', '#ffa500', '#151515')
-au VimEnter *  call NERDTreeHighlightFile('ods', 'Red', 'none', '#ffa500', '#151515')
-
-" archivy
-au VimEnter *  call NERDTreeHighlightFile('zip', 'green', 'none', 'green', '#151515')
-au VimEnter *  call NERDTreeHighlightFile('tar', 'green', 'none', 'green', '#151515')
-au VimEnter *  call NERDTreeHighlightFile('gz', 'green', 'none', 'green', '#151515')
-au VimEnter *  call NERDTreeHighlightFile('7z', 'green', 'none', 'green', '#151515')
-au VimEnter *  call NERDTreeHighlightFile('rar', 'green', 'none', 'green', '#151515')
-au VimEnter *  call NERDTreeHighlightFile('bz2', 'green', 'none', 'green', '#151515')
-
-" zdrojaky
-au VimEnter *  call NERDTreeHighlightFile('py', 'cyan', 'none', 'cyan', '#151515')
-au VimEnter *  call NERDTreeHighlightFile('sh', 'cyan', 'none', 'cyan', '#151515')
-au VimEnter *  call NERDTreeHighlightFile('cpp', 'cyan', 'none', 'cyan', '#151515')
-au VimEnter *  call NERDTreeHighlightFile('c', 'cyan', 'none', 'cyan', '#151515')
-au VimEnter *  call NERDTreeHighlightFile('ts', 'cyan', 'none', 'cyan', '#151515')
-
-au VimEnter *  call NERDTreeHighlightFile('html', 'magenta', 'none', 'magenta', '#151515')
-
-au VimEnter *  call NERDTreeHighlightFile('js', 'green', 'none', 'green', '#151515')
-
-" textovy ne-zdrojaky
-au VimEnter *  call NERDTreeHighlightFile('tex', 'yellow', 'none', 'yellow', '#151515')
-au VimEnter *  call NERDTreeHighlightFile('md', 'yellow', 'none', 'yellow', '#151515')
-au VimEnter *  call NERDTreeHighlightFile('txt', 'yellow', 'none', 'yellow', '#151515')
-au VimEnter *  call NERDTreeHighlightFile('csv', 'yellow', 'none', 'yellow', '#151515')
-au VimEnter *  call NERDTreeHighlightFile('css', 'yellow', 'none', 'yellow', '#151515')
-au VimEnter *  call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
-au VimEnter *  call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
-au VimEnter *  call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
-au VimEnter *  call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
+"
+"function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+" exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+" exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+"endfunction
+"
+"" dokumenty
+"au VimEnter *  call NERDTreeHighlightFile('doc', 'Red', 'none', '#ffa500', '#151515')
+"au VimEnter *  call NERDTreeHighlightFile('docx', 'Red', 'none', '#ffa500', '#151515')
+"au VimEnter *  call NERDTreeHighlightFile('pdf', 'Red', 'none', '#ffa500', '#151515')
+"au VimEnter *  call NERDTreeHighlightFile('odt', 'Red', 'none', '#ffa500', '#151515')
+"au VimEnter *  call NERDTreeHighlightFile('ods', 'Red', 'none', '#ffa500', '#151515')
+"
+"" archivy
+"au VimEnter *  call NERDTreeHighlightFile('zip', 'green', 'none', 'green', '#151515')
+"au VimEnter *  call NERDTreeHighlightFile('tar', 'green', 'none', 'green', '#151515')
+"au VimEnter *  call NERDTreeHighlightFile('gz', 'green', 'none', 'green', '#151515')
+"au VimEnter *  call NERDTreeHighlightFile('7z', 'green', 'none', 'green', '#151515')
+"au VimEnter *  call NERDTreeHighlightFile('rar', 'green', 'none', 'green', '#151515')
+"au VimEnter *  call NERDTreeHighlightFile('bz2', 'green', 'none', 'green', '#151515')
+"
+"" zdrojaky
+"au VimEnter *  call NERDTreeHighlightFile('py', 'cyan', 'none', 'cyan', '#151515')
+"au VimEnter *  call NERDTreeHighlightFile('sh', 'cyan', 'none', 'cyan', '#151515')
+"au VimEnter *  call NERDTreeHighlightFile('cpp', 'cyan', 'none', 'cyan', '#151515')
+"au VimEnter *  call NERDTreeHighlightFile('c', 'cyan', 'none', 'cyan', '#151515')
+"au VimEnter *  call NERDTreeHighlightFile('ts', 'cyan', 'none', 'cyan', '#151515')
+"
+"au VimEnter *  call NERDTreeHighlightFile('html', 'magenta', 'none', 'magenta', '#151515')
+"
+"au VimEnter *  call NERDTreeHighlightFile('js', 'green', 'none', 'green', '#151515')
+"
+"" textovy ne-zdrojaky
+"au VimEnter *  call NERDTreeHighlightFile('tex', 'yellow', 'none', 'yellow', '#151515')
+"au VimEnter *  call NERDTreeHighlightFile('md', 'yellow', 'none', 'yellow', '#151515')
+"au VimEnter *  call NERDTreeHighlightFile('txt', 'yellow', 'none', 'yellow', '#151515')
+"au VimEnter *  call NERDTreeHighlightFile('csv', 'yellow', 'none', 'yellow', '#151515')
+"au VimEnter *  call NERDTreeHighlightFile('css', 'yellow', 'none', 'yellow', '#151515')
+"au VimEnter *  call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
+"au VimEnter *  call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
+"au VimEnter *  call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+"au VimEnter *  call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
 
 
 
