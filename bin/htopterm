@@ -1,2 +1,3 @@
 #!/bin/sh
-term --title htopterm -- htop
+#term --title htopterm -- htop
+term --title htopterm -- bpytop

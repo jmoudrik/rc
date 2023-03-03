@@ -26,6 +26,7 @@ alias gs="git status"
 alias gt="git commit"
 alias gu="git push"
 
+alias rg="rg -i"
 alias xv='sxiv'
 alias cal="ncal -M"
 alias pdfgrep="pdfgrep -n"
@@ -57,9 +58,9 @@ box () {
 	echo "#######################################"
 }
 
-alias gvim="gvim -p"
-alias vim="vim -p"
-alias vi="vim -p"
+alias gvim="nvim -p"
+alias vim="nvim -p"
+alias vi="nvim -p"
 alias parallel="parallel --citation"
 alias mc='n'
 
@@ -97,6 +98,8 @@ n ()
     # stty stop undef
     # stty lwrap undef
     # stty lnext undef
+	
+	export EDITOR=nvim
 
     nnn "$@"
 

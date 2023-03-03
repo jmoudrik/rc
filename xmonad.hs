@@ -109,7 +109,8 @@ main = do
      , ((mod3Mask, xK_KP_Subtract ), sendMessage (IncMasterN (-1))) -- decrease the number of window  
      --, ((controlMask,        xK_Right   ), sendMessage Expand) -- expand master pane  
      --, ((controlMask,        xK_Left   ), sendMessage Shrink) -- shrink master pane  
-    , ((0, xK_Print), spawn "scrot") -- capture screenshot of full desktop  
+    , ((0, xK_Print), spawn "flameshot gui") -- capture screenshot of full desktop  
+    --, ((0, xK_Print), spawn "scrot") -- capture screenshot of full desktop  
 
 	--, ((mod3Mask, xK_g     ), gotoMenu)
 	--, ((mod3Mask, xK_b     ), bringMenu)
