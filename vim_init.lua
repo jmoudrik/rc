@@ -55,7 +55,8 @@ require("scrollbar.handlers.gitsigns").setup()
 require("scrollbar.handlers.search").setup({ })
 
 require('lualine').setup()
-require('bufferline').setup()
+require('tabby').setup()
+
 
 --require('diffview').setup()
 require("mason").setup({

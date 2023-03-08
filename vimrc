@@ -61,8 +61,7 @@ Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-tree/nvim-tree.lua'
 
 Plug 'sindrets/diffview.nvim'
-"" sracka nejaka?
-Plug 'romgrk/barbar.nvim'
+Plug 'nanozuki/tabby.nvim'
 
 Plug 'kylechui/nvim-surround'
 
