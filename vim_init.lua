@@ -52,9 +52,16 @@ require("nvim-autopairs").setup {}
 require('gitsigns').setup()
 require("scrollbar").setup()
 require("scrollbar.handlers.gitsigns").setup()
-require("scrollbar.handlers.search").setup({ })
+require("scrollbar.handlers.search").setup({})
 
-require('lualine').setup()
+require('lualine').setup({
+	sections = {
+		lualine_c = {
+			{ 'filename', path = 1, }
+		}
+	}
+})
+
 require('tabby').setup()
 
 
@@ -103,18 +110,16 @@ require("eslint").setup({
 	},
 	-- Copied from nvim-lspconfig/lua/lspconfig/server_conigurations/eslint.js
 	root_dir = util.root_pattern
-
-	
-	--		JM nejak sem posral syntax 
---		'.eslintrc',
---		'.eslintrc.js',
---		'.eslintrc.cjs',
---		'.eslintrc.yaml',
---		'.eslintrc.yml',
---		'.eslintrc.json'
---	-- Disabled to prevent "No ESLint configuration found" exceptions
---	-- 'package.json',
---	)
+	--		JM nejak sem posral syntax
+	--		'.eslintrc',
+	--		'.eslintrc.js',
+	--		'.eslintrc.cjs',
+	--		'.eslintrc.yaml',
+	--		'.eslintrc.yml',
+	--		'.eslintrc.json'
+	--	-- Disabled to prevent "No ESLint configuration found" exceptions
+	--	-- 'package.json',
+	--	)
 })
 
 

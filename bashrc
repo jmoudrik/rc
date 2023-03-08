@@ -59,9 +59,9 @@ box () {
 	echo "#######################################"
 }
 
-alias gvim="nvim -p"
-alias vim="nvim -p"
-alias vi="nvim -p"
+alias gvim="nvim"
+alias vim="nvim"
+alias vi="nvim"
 alias parallel="parallel --citation"
 alias mc='n'
 
