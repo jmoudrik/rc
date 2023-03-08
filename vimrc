@@ -17,6 +17,7 @@ call plug#begin()
 Plug 'nvim-lua/plenary.nvim'
 Plug 'neovim/nvim-lspconfig'
 
+Plug 'kevinhwang91/nvim-hlslens'
 
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
@@ -28,7 +29,11 @@ Plug 'windwp/nvim-autopairs'
 Plug 'p00f/nvim-ts-rainbow'
 
 " info o radkach vedle linenum
-Plug 'airblade/vim-gitgutter'
+" JM jeste dole zapinatko
+"Plug 'airblade/vim-gitgutter'
+Plug 'lewis6991/gitsigns.nvim'
+
+Plug 'petertriho/nvim-scrollbar'
 
 Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'nvim-telescope/telescope.nvim', {'tag':'0.1.1'}
@@ -76,7 +81,7 @@ Plug 'tpope/vim-fugitive'
 call plug#end()
 
 
-let g:gitgutter_enabled = 1
+"let g:gitgutter_enabled = 1
 
 "" JM OUT
 ""autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact

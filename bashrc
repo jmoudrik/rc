@@ -27,6 +27,7 @@ alias gt="git commit"
 alias gu="git push"
 
 alias rg="rg -i"
+alias ag="rg"
 alias xv='sxiv'
 alias cal="ncal -M"
 alias pdfgrep="pdfgrep -n"

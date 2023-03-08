@@ -26,7 +26,33 @@ vim.keymap.set('n', '<leader>tf', function()
 	vim.cmd [[ NvimTreeFindFile ]]
 end, {})
 
+
+-- hlslens
+-- vyhledavani - matches
+require('hlslens').setup()
+local kopts = { noremap = true, silent = true }
+
+vim.api.nvim_set_keymap('n', 'n',
+	[[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
+	kopts)
+vim.api.nvim_set_keymap('n', 'N',
+	[[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
+	kopts)
+vim.api.nvim_set_keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+vim.api.nvim_set_keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+vim.api.nvim_set_keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+
+vim.api.nvim_set_keymap('n', '<Leader>l', '<Cmd>noh<CR>', kopts)
+
+--
+
 require("nvim-autopairs").setup {}
+
+require('gitsigns').setup()
+require("scrollbar").setup()
+require("scrollbar.handlers.gitsigns").setup()
+require("scrollbar.handlers.search").setup({ })
 
 require('lualine').setup()
 require('bufferline').setup()
@@ -75,16 +101,19 @@ require("eslint").setup({
 		run_on = "type", -- or `save`
 	},
 	-- Copied from nvim-lspconfig/lua/lspconfig/server_conigurations/eslint.js
-	root_dir = util.root_pattern(
-		'.eslintrc',
-		'.eslintrc.js',
-		'.eslintrc.cjs',
-		'.eslintrc.yaml',
-		'.eslintrc.yml',
-		'.eslintrc.json'
-	-- Disabled to prevent "No ESLint configuration found" exceptions
-	-- 'package.json',
-	)
+	root_dir = util.root_pattern
+
+	
+	--		JM nejak sem posral syntax 
+--		'.eslintrc',
+--		'.eslintrc.js',
+--		'.eslintrc.cjs',
+--		'.eslintrc.yaml',
+--		'.eslintrc.yml',
+--		'.eslintrc.json'
+--	-- Disabled to prevent "No ESLint configuration found" exceptions
+--	-- 'package.json',
+--	)
 })
 
 
@@ -93,13 +122,13 @@ require("eslint").setup({
 local cmp = require 'cmp'
 
 local has_words_before = function()
-  unpack = unpack or table.unpack
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+	unpack = unpack or table.unpack
+	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
 local feedkey = function(key, mode)
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
 
 cmp.setup({
@@ -130,7 +159,7 @@ cmp.setup({
 		--				fallback()
 		--			end
 		--		end, { "i", "s", "c", }),
-		["<Tab>"] = cmp.mapping(function(fallback)
+			["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
 			elseif vim.fn["vsnip#available"](1) == 1 then
@@ -141,20 +170,20 @@ cmp.setup({
 				fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
 			end
 		end, { "i", "s" }),
-
-		["<S-Tab>"] = cmp.mapping(function()
+			["<S-Tab>"] = cmp.mapping(function()
 			if cmp.visible() then
 				cmp.select_prev_item()
-			elseif vim.fn["vsnip#jumpable"]( -1) == 1 then
+			elseif vim.fn["vsnip#jumpable"](-1) == 1 then
 				feedkey("<Plug>(vsnip-jump-prev)", "")
 			end
 		end, { "i", "s" }),
 		--['<C-b>'] = cmp.mapping.scroll_docs(-4),
 		--['<C-f>'] = cmp.mapping.scroll_docs(4),
-		['<C-Space>'] = cmp.mapping.complete(),
-		['<C-e>'] = cmp.mapping.abort(),
+			['<C-Space>'] = cmp.mapping.complete(),
+			['<C-e>'] = cmp.mapping.abort(),
 		-- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-		['<CR>'] = cmp.mapping.confirm({ select = true }), }),
+			['<CR>'] = cmp.mapping.confirm({ select = true }),
+	}),
 	sources = cmp.config.sources({
 		{ name = 'nvim_lsp' },
 		{ name = 'vsnip' }, -- For vsnip users.
@@ -223,6 +252,7 @@ require('lspconfig').jsonls.setup { on_attach = on_attach, capabilities = capabi
 require('lspconfig').marksman.setup { on_attach = on_attach, capabilities = capabilities }
 require('lspconfig').bashls.setup { on_attach = on_attach, capabilities = capabilities }
 require('lspconfig').awk_ls.setup { on_attach = on_attach, capabilities = capabilities }
+require('lspconfig').svelte.setup { on_attach = on_attach, capabilities = capabilities }
 require('lspconfig').lua_ls.setup { on_attach = on_attach, capabilities = capabilities,
 	settings = {
 		Lua = {
@@ -244,6 +274,13 @@ vim.api.nvim_set_keymap("n", "<F3>", "<cmd>TroubleToggle<cr>",
 
 require("nightfox").setup {}
 
+-- JM s novym jazykem je potreba
+-- nainstalovat parser, pomoci :TSInstall bash
+-- tohle vypise currently installled langs
+-- : checkhealth nvim-treesitter
+-- seznam podporovanych je tady
+-- https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
+--
 require 'nvim-treesitter.configs'.setup {
 	highlight = {
 		enable = true,
