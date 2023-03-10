@@ -63,6 +63,8 @@ Plug 'nvim-tree/nvim-tree.lua'
 Plug 'sindrets/diffview.nvim'
 Plug 'nanozuki/tabby.nvim'
 
+Plug 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'
+
 Plug 'kylechui/nvim-surround'
 
 " autocomplete

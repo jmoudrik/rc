@@ -21,7 +21,7 @@ require("nvim-tree").setup {
 		ignore = false
 	}
 }
-vim.cmd [[ highlight NvimTreeOpenedFile guifg=red ]]
+vim.cmd [[ highlight NvimTreeOpenedFile gui=underline ]]
 vim.keymap.set('n', '<leader>tf', function()
 	vim.cmd [[ NvimTreeFindFile ]]
 end, {})
@@ -273,7 +273,34 @@ require('lspconfig').lua_ls.setup { on_attach = on_attach, capabilities = capabi
 require("trouble").setup {
 	mode = "document_diagnostics"
 }
+
+-- JM: show diag in floating wins
+-- You will likely want to reduce updatetime which affects CursorHold
+-- note: this setting is global and should be set only once
+vim.o.updatetime = 250
+vim.cmd [[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 vim.api.nvim_set_keymap("n", "<F3>", "<cmd>TroubleToggle<cr>",
+	{ silent = true, noremap = true, }
+)
+
+vim.api.nvim_create_autocmd("CursorHold", {
+  buffer = bufnr,
+  callback = function()
+    local opts = {
+      focusable = false,
+      close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+      border = 'rounded',
+      source = 'always',
+      prefix = ' ',
+      scope = 'cursor',
+    }
+    vim.diagnostic.open_float(nil, opts)
+  end
+})
+
+-- JM toggling
+require('toggle_lsp_diagnostics').init({vim.diagnostic.config()})
+vim.api.nvim_set_keymap("n", "<F4>", "<Plug>(toggle-lsp-diag-vtext)",
 	{ silent = true, noremap = true, }
 )
 
