@@ -29,7 +29,7 @@ end, {})
 
 -- hlslens
 -- vyhledavani - matches
-require('hlslens').setup()
+require('hlslens').setup({ calm_down = true })
 local kopts = { noremap = true, silent = true }
 
 vim.api.nvim_set_keymap('n', 'n',
@@ -219,7 +219,10 @@ cmp.setup.cmdline(':', {
 
 require("telescope").load_extension("live_grep_args")
 local telescope_builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', telescope_builtin.find_files, {})
+-- jm before had
+--vim.keymap.set('n', '<leader>ff', telescope_builtin.find_files, {})
+vim.api.nvim_set_keymap('n', '<Leader>ff', '<Cmd>Telescope find_files hidden=true<CR>', kopts)
+
 --vim.keymap.set('n', '<leader>fg', telescope_builtin.live_grep, {})
 vim.keymap.set('n', '<leader>rg', require('telescope').extensions.live_grep_args.live_grep_args, {})
 vim.keymap.set('n', '<leader>fb', telescope_builtin.buffers, {})
@@ -284,22 +287,22 @@ vim.api.nvim_set_keymap("n", "<F3>", "<cmd>TroubleToggle<cr>",
 )
 
 vim.api.nvim_create_autocmd("CursorHold", {
-  buffer = bufnr,
-  callback = function()
-    local opts = {
-      focusable = false,
-      close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-      border = 'rounded',
-      source = 'always',
-      prefix = ' ',
-      scope = 'cursor',
-    }
-    vim.diagnostic.open_float(nil, opts)
-  end
+	buffer = bufnr,
+	callback = function()
+		local opts = {
+			focusable = false,
+			close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+			border = 'rounded',
+			source = 'always',
+			prefix = ' ',
+			scope = 'cursor',
+		}
+		vim.diagnostic.open_float(nil, opts)
+	end
 })
 
 -- JM toggling
-require('toggle_lsp_diagnostics').init({vim.diagnostic.config()})
+require('toggle_lsp_diagnostics').init({ vim.diagnostic.config() })
 vim.api.nvim_set_keymap("n", "<F4>", "<Plug>(toggle-lsp-diag-vtext)",
 	{ silent = true, noremap = true, }
 )
