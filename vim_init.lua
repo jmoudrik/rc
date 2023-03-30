@@ -26,6 +26,17 @@ vim.keymap.set('n', '<leader>tf', function()
 	vim.cmd [[ NvimTreeFindFile ]]
 end, {})
 
+-- chat gpt - sucks
+--require("chatgpt").setup({})
+
+-- mozna lepsi
+require("codegpt.config")
+
+vim.g["codegpt_commands"] = {
+		["explain"] = {
+		callback_type = "code_popup",
+	},
+}
 
 -- hlslens
 -- vyhledavani - matches
@@ -217,6 +228,17 @@ cmp.setup.cmdline(':', {
 	})
 })
 
+require('telescope').setup({
+  defaults = {
+    layout_config = {
+      width = 0.99999,
+      height = 200
+      -- other layout configuration here
+    },
+    -- other defaults configuration here
+  },
+  -- other configuration values here
+})
 require("telescope").load_extension("live_grep_args")
 local telescope_builtin = require('telescope.builtin')
 -- jm before had

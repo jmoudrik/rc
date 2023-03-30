@@ -13,7 +13,12 @@ call plug#begin()
 "Plug 'chmp/mdnav'
 "Plug 'preservim/nerdtree'
 "Plug 'PhilRunninger/nerdtree-buffer-ops'
-"
+
+"" kinda sucks
+"Plug 'jackMort/ChatGPT.nvim', {'commit':'8820b99c'}
+Plug 'dpayne/CodeGPT.nvim'
+Plug 'MunifTanjim/nui.nvim'
+
 Plug 'nvim-lua/plenary.nvim'
 Plug 'neovim/nvim-lspconfig'
 
