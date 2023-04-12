@@ -1,9 +1,9 @@
-Config { font = "xft:Terminus:size=14:antialias=true"
+Config { font = "xft:Terminus:size=14:antialias=false"
      , bgColor = "#000000"
      , fgColor = "grey"
 	 , lowerOnStart = True
      --, position = Static { xpos = 200 , ypos = 0, width = 1400, height = 20 }
-     , position = TopW R 88 
+     , position = TopW R 93 
      , commands = [ 
              Run Cpu ["-L","3","-H","50","--normal","green","--high","red", "-t", "<total>%"] 10 
              , Run Memory ["-t","<fc=green><usedratio></fc>%"] 10
@@ -24,6 +24,6 @@ Config { font = "xft:Terminus:size=14:antialias=true"
            ]
      , sepChar = "%"
      , alignSep = "}{"
-     , template = " %StdinReader%}{<fc=grey>(</fc>%kbd%<fc=grey>)</fc> <fc=grey>[%cpu% %memory%]</fc> <fc=grey>[</fc><fc=cyan>%latency%</fc><fc=grey>]</fc> %disku% <fc=grey>[</fc><fc=white>%battery%</fc><fc=grey>]</fc> <fc=grey>[</fc><fc=cyan>%timeny%</fc><fc=grey>]</fc> <fc=cyan>%date%</fc>"
+     , template = " %StdinReader%}{<fc=grey></fc>%kbd%<fc=grey></fc> <fc=grey>[%cpu% %memory%]</fc> <fc=grey></fc><fc=cyan>%latency%</fc><fc=grey></fc> %disku% <fc=grey>[</fc><fc=white>%battery%</fc><fc=grey>]</fc> <fc=grey></fc><fc=cyan>%timeny%</fc><fc=grey>,</fc> <fc=cyan>%date%</fc>"
      --, template = " %StdinReader%}{<fc=grey>(</fc>%kbd%<fc=grey>)</fc>  <fc=grey>[%cpu% %memory%]</fc>  <fc=grey>[</fc><fc=cyan>%wlan1%</fc><fc=grey>]</fc>  <fc=grey>[</fc><fc=white>%battery%</fc><fc=grey>]</fc>  <fc=cyan>%date%</fc>"
  }
