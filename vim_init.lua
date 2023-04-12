@@ -228,16 +228,31 @@ cmp.setup.cmdline(':', {
 	})
 })
 
+
+-- navi
+require('leap').add_default_mappings()
+
 require('telescope').setup({
-  defaults = {
-    layout_config = {
-      width = 0.99999,
-      height = 200
-      -- other layout configuration here
-    },
-    -- other defaults configuration here
-  },
-  -- other configuration values here
+	defaults = {
+		layout_config = {
+			width = 0.99999,
+			height = 200
+			-- other layout configuration here
+		},
+		ripgrep_arguments = {
+			'rg',
+			'--no-ignore',
+			'--no-ignore-global',
+			'--hidden',
+			'--no-heading',
+			'--with-filename',
+			'--line-number',
+			'--column',
+			'--smart-case'
+		},
+		-- other defaults configuration here
+	},
+	-- other configuration values here
 })
 require("telescope").load_extension("live_grep_args")
 local telescope_builtin = require('telescope.builtin')
@@ -249,6 +264,7 @@ vim.api.nvim_set_keymap('n', '<Leader>ff', '<Cmd>Telescope find_files hidden=tru
 vim.keymap.set('n', '<leader>rg', require('telescope').extensions.live_grep_args.live_grep_args, {})
 vim.keymap.set('n', '<leader>fb', telescope_builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', telescope_builtin.help_tags, {})
+vim.keymap.set('n', '<leader>fs', telescope_builtin.lsp_workspace_symbols, {})
 
 -- Common LSP On Attach function
 local on_attach = function(_, bufnr)

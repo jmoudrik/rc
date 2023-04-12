@@ -48,6 +48,11 @@ Plug 'nvim-telescope/telescope-live-grep-args.nvim'
 Plug 'kosayoda/nvim-lightbulb'
 Plug 'antoinemadec/FixCursorHold.nvim'
 
+"" navigace
+Plug 'ggandor/leap.nvim'
+
+Plug 'RRethy/vim-illuminate'
+
 Plug 'EdenEast/nightfox.nvim'
 Plug 'sainnhe/sonokai'
 "

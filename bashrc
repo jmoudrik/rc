@@ -19,7 +19,7 @@ alias gb="git branch"
 alias gc="git checkout"
 alias gd="git diff"
 alias gg="git gui"
-alias G="vi -c G"
+alias G="vi -c G -c only"
 alias gh="git stash"
 alias gl="git log"
 alias gp="git pull"
@@ -60,7 +60,6 @@ box () {
 	echo "#######################################"
 }
 
-alias gvim="nvim"
 alias vim="nvim"
 alias vi="nvim"
 alias parallel="parallel --citation"
