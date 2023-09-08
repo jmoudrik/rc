@@ -27,6 +27,7 @@ deluge &
 xscreensaver -no-splash &
 birdtray &
 blueman-tray &
+log_bat.sh > /dev/null &
 
 #
 #  RUN

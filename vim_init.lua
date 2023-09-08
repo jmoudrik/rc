@@ -1,3 +1,5 @@
+local kopts = { noremap = true, silent = true }
+
 -- JM: open terminal here
 vim.keymap.set('n', '<leader>th', function() io.popen("th") end)
 
@@ -13,25 +15,30 @@ require("nvim-tree").setup {
 		highlight_git = true
 	},
 	update_focused_file = {
-		enable = false,
+		enable = true,
+		--update_cwd = true,
 		update_root = true,
 		ignore_list = {},
 	},
 	git = {
+		enable = false,
 		ignore = false
 	}
 }
+vim.g.nvim_tree_respect_buf_cwd = 1
 vim.cmd [[ highlight NvimTreeOpenedFile gui=underline ]]
 vim.keymap.set('n', '<leader>tf', function()
 	vim.cmd [[ NvimTreeFindFile ]]
 end, {})
 
+vim.keymap.set('n', '<F2>', function()
+	vim.cmd [[ NvimTreeToggle ]]
+end, {})
+
 -- chat gpt - sucks
 --require("chatgpt").setup({})
-
 -- mozna lepsi
 require("codegpt.config")
-
 vim.g["codegpt_commands"] = {
 		["explain"] = {
 		callback_type = "code_popup",
@@ -41,7 +48,6 @@ vim.g["codegpt_commands"] = {
 -- hlslens
 -- vyhledavani - matches
 require('hlslens').setup({ calm_down = true })
-local kopts = { noremap = true, silent = true }
 
 vim.api.nvim_set_keymap('n', 'n',
 	[[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
@@ -54,7 +60,7 @@ vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], 
 vim.api.nvim_set_keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
 vim.api.nvim_set_keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
 
-vim.api.nvim_set_keymap('n', '<Leader>l', '<Cmd>noh<CR>', kopts)
+vim.api.nvim_set_keymap('n', '<leader>l', '<Cmd>noh<CR>', kopts)
 
 --
 
@@ -229,7 +235,8 @@ cmp.setup.cmdline(':', {
 })
 
 
--- navi
+-- navigation
+-- alternative to try might be https://github.com/easymotion/vim-easymotion
 require('leap').add_default_mappings()
 
 require('telescope').setup({
@@ -251,18 +258,38 @@ require('telescope').setup({
 			'--smart-case'
 		},
 		-- other defaults configuration here
+		path_display = { "truncate" }
+	},
+	extensions = {
+		frecency = {
+			default_workspace = 'CWD',
+			--db_root = "home/my_username/path/to/db_root",
+			--show_scores = false,
+			show_unindexed = false,
+			--ignore_patterns = {"*.git/*", "*/tmp/*"},
+			disable_devicons = false,
+			--      workspaces = {
+			--        ["conf"]    = "/home/my_username/.config",
+			--        ["data"]    = "/home/my_username/.local/share",
+			--        ["project"] = "/home/my_username/projects",
+			--        ["wiki"]    = "/home/my_username/wiki"
+			--      }
+		}
 	},
 	-- other configuration values here
 })
 require("telescope").load_extension("live_grep_args")
+require("telescope").load_extension("frecency")
 local telescope_builtin = require('telescope.builtin')
 -- jm before had
 --vim.keymap.set('n', '<leader>ff', telescope_builtin.find_files, {})
-vim.api.nvim_set_keymap('n', '<Leader>ff', '<Cmd>Telescope find_files hidden=true<CR>', kopts)
+vim.api.nvim_set_keymap('n', '<leader>ff', '<Cmd>Telescope find_files hidden=true<CR>', kopts)
 
 --vim.keymap.set('n', '<leader>fg', telescope_builtin.live_grep, {})
 vim.keymap.set('n', '<leader>rg', require('telescope').extensions.live_grep_args.live_grep_args, {})
 vim.keymap.set('n', '<leader>fb', telescope_builtin.buffers, {})
+vim.keymap.set('n', '<leader>fr', require('telescope').extensions.frecency.frecency, {})
+--vim.api.nvim_set_keymap("n", "<leader>fr", "<Cmd>lua require('telescope').extensions.frecency.frecency()<CR>", {noremap = true, silent = true})
 vim.keymap.set('n', '<leader>fh', telescope_builtin.help_tags, {})
 vim.keymap.set('n', '<leader>fs', telescope_builtin.lsp_workspace_symbols, {})
 
@@ -270,8 +297,10 @@ vim.keymap.set('n', '<leader>fs', telescope_builtin.lsp_workspace_symbols, {})
 local on_attach = function(_, bufnr)
 	local opts = { buffer = bufnr }
 	vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+
 	--vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
 	vim.keymap.set('n', 'gd', telescope_builtin.lsp_definitions, opts)
+
 	vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
 	--vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
 	vim.keymap.set('n', 'gi', telescope_builtin.lsp_implementations, opts)
@@ -279,7 +308,7 @@ local on_attach = function(_, bufnr)
 	vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
 	vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
 	vim.keymap.set('n', '<leader>wl', function() vim.inspect(vim.lsp.buf.list_workspace_folders()) end, opts)
-	vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
+	--vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
 	vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
 	--vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
 	vim.keymap.set('n', 'gr', telescope_builtin.lsp_references, opts)
@@ -367,7 +396,7 @@ require 'nvim-treesitter.configs'.setup {
 	rainbow = {
 		enable = true,
 		-- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
-		extended_mode = false, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+		extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
 		max_file_lines = nil, -- Do not enable for files with more than n lines, int
 		-- colors = {}, -- table of hex strings
 		-- termcolors = {} -- table of colour name strings
@@ -378,7 +407,31 @@ require('nvim-ts-autotag').setup()
 
 --require('hlargs').setup()
 
+-- JM moc se mi to nelibi, nemuzu prijit na to co mackat
 require("nvim-surround").setup()
+
+-- Adding <leader> prefix for sandwich to avoid conflicting with leap.nvim
+--
+--vim.g.sandwich_no_default_key_mappings = 1
+--local sandwich_opts = {}
+---- add
+--vim.keymap.set({ 'n', 'x', 'o' }, '<leader>sa', '<Plug>(sandwich-add)', sandwich_opts)
+---- add current line as a block (convert single line ifs to blocked ifs)
+--vim.keymap.set('n', '<leader>Sa', 'V<Plug>(sandwich-add)', sandwich_opts)
+---- delete
+--vim.keymap.set('x', '<leader>sd', '<Plug>(sandwich-delete)', sandwich_opts)
+--vim.keymap.set('n', '<leader>sd', '<Plug>(sandwich-delete-auto)', sandwich_opts)
+---- replace
+--vim.keymap.set('x', '<leader>sr', '<Plug>(sandwich-replace)', sandwich_opts)
+--vim.keymap.set('n', '<leader>sr', '<Plug>(sandwich-replace-auto)', sandwich_opts)
+---- sandwich word
+--vim.keymap.set('n', '<leader>sw', '<Plug>(sandwich-add)iw', sandwich_opts)
+--vim.keymap.set('n', '<leader>sW', '<Plug>(sandwich-add)iW', sandwich_opts)
+---- Some special cases
+--local fast_sandwich_maps = { "'", '"', '`' }
+--for _, char in ipairs(fast_sandwich_maps) do
+--	vim.keymap.set('n', "<leader>" .. char, '<Plug>(sandwich-replace-auto)' .. char, sandwich_opts) -- <leader>{char} to replace sandwich to {char}
+--end
 
 -- nahovno
 --require("twilight").setup { dimming = { alpha = 0.75 } }

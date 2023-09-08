@@ -43,6 +43,8 @@ Plug 'petertriho/nvim-scrollbar'
 Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'nvim-telescope/telescope.nvim', {'tag':'0.1.1'}
 Plug 'nvim-telescope/telescope-live-grep-args.nvim'
+Plug 'nvim-telescope/telescope-frecency.nvim'
+Plug 'kkharji/sqlite.lua'
 
 "" zarovka na code actions
 Plug 'kosayoda/nvim-lightbulb'
@@ -76,6 +78,7 @@ Plug 'nanozuki/tabby.nvim'
 Plug 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'
 
 Plug 'kylechui/nvim-surround'
+Plug 'machakann/vim-sandwich'
 
 " autocomplete
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -137,6 +140,7 @@ nmap <leader>q :q!<cr>
 nmap <leader>Q :qall!<cr>
 nmap <C-PageDown> :tabn<cr>
 nmap <C-PageUp> :tabp<cr>
+nmap <leader>dp :diffput<cr>
 
 " Pepa pridal: kvuli kontext menu pro spell
 " JM ted rozbity s neovimem

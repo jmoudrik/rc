@@ -9,6 +9,7 @@ if [[ $- != *i* ]]; then
 fi
 
 export LS_COLORS="$LS_COLORS:di=1;33:"
+export EXA_COLORS="da=32:"
 
 alias umount_remote="fusermount -u /home/jm/remote"
 alias su="sudo bash"
@@ -22,6 +23,7 @@ alias gg="git gui"
 alias G="vi -c G -c only"
 alias gh="git stash"
 alias gl="git log"
+alias gll="git log --graph --abbrev-commit --decorate --format=format:'%C(bold yellow)%h%C(reset) - %C(dim white)(%ar)%C(reset) %C(auto)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all"
 alias gp="git pull"
 alias gs="git status"
 alias gt="git commit"
@@ -40,7 +42,7 @@ alias ssh_tunel="autossh -D 127.0.0.1:10003 j2m -N &"
 alias cdms="cd /home/jm/remote/afs/ms/u/m/moudj6am/"
 
 alias seznam="ping www.seznam.cz"
-alias ls="ls -X --color=auto"
+alias ls="eza -X --color=always"
 alias ll="ls -l"
 alias lt="ls -lt"
 
@@ -51,7 +53,7 @@ set completion-ignore-case on
 
 
 lth () {
-	ls -lt "$@" | head -n 20
+	ls -snew -l "$@" | head -n 20
 }
 
 box () {
