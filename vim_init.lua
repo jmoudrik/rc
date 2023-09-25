@@ -9,7 +9,24 @@ vim.g.loaded_netrwPlugin = 1
 -- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
 
+local function my_on_attach(bufnr)
+	local api = require("nvim-tree.api")
+
+	local function stuff()
+		local cur = api.tree.get_node_under_cursor();
+		io.popen("thh " .. tostring(cur))
+	end
+
+	-- default mappings
+	api.config.mappings.default_on_attach(bufnr)
+
+	-- custom mappings
+	vim.keymap.set('n', '<leader>tt', stuff, {})
+end
+
 require("nvim-tree").setup {
+	-- JM TODO nefunguje to
+	--on_attach = my_on_attach,
 	renderer = {
 		highlight_opened_files = "all",
 		highlight_git = true
@@ -30,7 +47,9 @@ vim.cmd [[ highlight NvimTreeOpenedFile gui=underline ]]
 vim.keymap.set('n', '<leader>tf', function()
 	vim.cmd [[ NvimTreeFindFile ]]
 end, {})
-
+vim.keymap.set('n', '<leader>r', function()
+	vim.cmd [[ redraw ]]
+end, {})
 vim.keymap.set('n', '<F2>', function()
 	vim.cmd [[ NvimTreeToggle ]]
 end, {})
