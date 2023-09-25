@@ -13,8 +13,9 @@ local function my_on_attach(bufnr)
 	local api = require("nvim-tree.api")
 
 	local function stuff()
-		local cur = api.tree.get_node_under_cursor();
-		io.popen("thh " .. tostring(cur))
+		--local cur = api.tree.get_node_under_cursor();
+		local path = require("nvim-tree.lib").get_node_at_cursor().absolute_path;
+		io.popen("thh " .. tostring(path))
 	end
 
 	-- default mappings
@@ -26,7 +27,7 @@ end
 
 require("nvim-tree").setup {
 	-- JM TODO nefunguje to
-	--on_attach = my_on_attach,
+	on_attach = my_on_attach,
 	renderer = {
 		highlight_opened_files = "all",
 		highlight_git = true
