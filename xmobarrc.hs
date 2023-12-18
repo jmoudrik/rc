@@ -1,4 +1,6 @@
-Config { font = "xft:Terminus:size=14:antialias=false"
+Config {
+	font = "xft:terminus--18" -- "-*-terminus-*-*-*-*-16-*-*-*-*-*-*-*"
+	--font = "xft:terminus:size=16:antialias=false"
      , bgColor = "#000000"
      , fgColor = "grey"
 	 , lowerOnStart = True

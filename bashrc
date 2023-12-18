@@ -42,9 +42,9 @@ alias ssh_tunel="autossh -D 127.0.0.1:10003 j2m -N &"
 alias cdms="cd /home/jm/remote/afs/ms/u/m/moudj6am/"
 
 alias seznam="ping www.seznam.cz"
-alias ls="eza -X --color=always"
+#alias ls="eza -X --color=always"
 alias ll="ls -l"
-alias lt="ls -lt"
+alias lt="ls -lsnew"
 
 alias jsp='python -m json.tool'
 alias strip="sed 's/^[[:space:]]*//;s/[[:space:]]*$//'"
@@ -53,7 +53,8 @@ set completion-ignore-case on
 
 
 lth () {
-	ls -snew -l "$@" | head -n 20
+	ls -lth "$@" | head -n 20
+#	ls -snew -l "$@" | tail -n 20
 }
 
 box () {
@@ -65,7 +66,7 @@ box () {
 alias vim="nvim"
 alias vi="nvim"
 alias parallel="parallel --citation"
-alias mc='n'
+#alias mc='n'
 
 ulimit -c unlimited
 

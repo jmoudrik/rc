@@ -33,7 +33,14 @@ import System.IO
 myExtraWorkspaces = [(xK_0, "0"),(xK_minus, "-"),(xK_equal, "=")]
 myWorkspaces  = ["1","2","3","4","5","6","7","8","9"]  ++ (map snd myExtraWorkspaces)
 
-myLayout = onWorkspaces ["9"] nobordersLayout $ tiled1 ||| Mirror tiled1 ||| tabbedLayout ||| gridLayout ||| tabbedLayout ||| nobordersLayout ||| simpleFloat
+myLayout = 
+--onWorkspaces ["9"] tabbedLayout $
+	tiled1 ||| Mirror tiled1 ||| tabbedLayout
+-- jm:
+-- grid je dobrej pro furu oken, ale to nepouzivam;
+-- nobordersLayout je fajn, ale tabbed s 1 oknem je dtto  
+-- simple float nepouzivam (a navic alt+t to dela)
+-- ||| gridLayout ||| nobordersLayout ||| simpleFloat
  where  
   tiled1 = spacing 0 $ smartBorders $ Tall nmaster1 delta ratio  
   --tiled2 = spacing 5 $ Tall nmaster2 delta ratio  

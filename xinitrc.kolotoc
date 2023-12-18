@@ -9,10 +9,11 @@ pepovo_rozlozeni.sh
 #  WM
 #
 
-trayer --edge top --align left --SetDockType true --SetPartialStrut true --expand true --width 6 --transparent true --alpha 0 --tint 0x000000 --height 20 &
+trayer --edge top --align left --SetDockType true --SetPartialStrut true --expand true --width 6 --transparent true --alpha 0 --tint 0x000000 --height 20 --monitor primary &
 #feh --bg-scale ~/obrazky/jumping-fox-HD.jpg &
 #feh --bg-scale ~/obrazky/Best-Cat-Wallpaper.jpg &
-feh --bg-scale ~/obrazky/carina_nebula_jwst_2022.jpg &
+#feh --bg-scale ~/obrazky/carina_nebula_jwst_2022.jpg &
+feh --bg-fill ~/obrazky/carina_nebula_jwst_2022.jpg --bg-fill ~/obrazky/inspirace/026-mirror-mirror.jpg &
 
 #
 #  APPS
