@@ -1,5 +1,5 @@
 Config {
-	font = "xft:terminus--18" -- "-*-terminus-*-*-*-*-16-*-*-*-*-*-*-*"
+	font = "xft:terminus--14" -- "-*-terminus-*-*-*-*-16-*-*-*-*-*-*-*"
 	--font = "xft:terminus:size=16:antialias=false"
      , bgColor = "#000000"
      , fgColor = "grey"
@@ -11,7 +11,7 @@ Config {
              , Run Memory ["-t","<fc=green><usedratio></fc>%"] 10
              --, Run Network "wlan1" ["-L","0","-H","70","--normal","green","--high","red"] 10 
              , Run Battery ["-t","AC <acstatus>, <left>%, <timeleft>","-L","50","-H","75","-h","green","-n","yell","-l","red"] 20 
-             , Run Com "/home/jm/prj/rc/bin/get_times.sh" [] "timeny" 10
+             --, Run Com "/home/jm/prj/rc/bin/get_times.sh" [] "timeny" 10
              , Run Date "%d.%m. %H:%M" "date" 10
              --, Run Com "/home/jm/bin/get_current_layout.sh" [] "layout" 2
              , Run Com "/home/jm/prj/rc/bin/get_latency.sh" [] "latency" 20
@@ -26,6 +26,7 @@ Config {
            ]
      , sepChar = "%"
      , alignSep = "}{"
-     , template = " %StdinReader%}{<fc=grey></fc>%kbd%<fc=grey></fc> <fc=grey>[%cpu% %memory%]</fc> <fc=grey></fc><fc=cyan>%latency%</fc><fc=grey></fc> %disku% <fc=grey>[</fc><fc=white>%battery%</fc><fc=grey>]</fc> <fc=grey></fc><fc=cyan>%timeny%</fc><fc=grey>,</fc> <fc=cyan>%date%</fc>"
+     , template = " %StdinReader%}{<fc=grey></fc>%kbd%<fc=grey></fc> <fc=grey>[%cpu% %memory%]</fc> <fc=grey></fc><fc=cyan>%latency%</fc><fc=grey></fc> %disku% <fc=grey>[</fc><fc=white>%battery%</fc><fc=grey>]</fc> <fc=cyan>%date%</fc>"
+	 -- <fc=grey></fc><fc=cyan>%timeny%</fc>
      --, template = " %StdinReader%}{<fc=grey>(</fc>%kbd%<fc=grey>)</fc>  <fc=grey>[%cpu% %memory%]</fc>  <fc=grey>[</fc><fc=cyan>%wlan1%</fc><fc=grey>]</fc>  <fc=grey>[</fc><fc=white>%battery%</fc><fc=grey>]</fc>  <fc=cyan>%date%</fc>"
  }

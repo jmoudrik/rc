@@ -29,6 +29,8 @@ alias gs="git status"
 alias gt="git commit"
 alias gu="git push"
 
+alias vitest='npx vitest --threads=false'
+
 alias rg="rg -i"
 alias ag="rg"
 alias xv='sxiv'

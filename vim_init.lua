@@ -282,25 +282,26 @@ require('telescope').setup({
 		path_display = { "truncate" }
 	},
 	extensions = {
-		frecency = {
-			default_workspace = 'CWD',
-			--db_root = "home/my_username/path/to/db_root",
-			--show_scores = false,
-			show_unindexed = false,
-			--ignore_patterns = {"*.git/*", "*/tmp/*"},
-			disable_devicons = false,
-			--      workspaces = {
-			--        ["conf"]    = "/home/my_username/.config",
-			--        ["data"]    = "/home/my_username/.local/share",
-			--        ["project"] = "/home/my_username/projects",
-			--        ["wiki"]    = "/home/my_username/wiki"
-			--      }
-		}
+		-- jM disable is BS
+--		frecency = {
+--			default_workspace = 'CWD',
+--			--db_root = "home/my_username/path/to/db_root",
+--			--show_scores = false,
+--			show_unindexed = false,
+--			--ignore_patterns = {"*.git/*", "*/tmp/*"},
+--			disable_devicons = false,
+--			--      workspaces = {
+--			--        ["conf"]    = "/home/my_username/.config",
+--			--        ["data"]    = "/home/my_username/.local/share",
+--			--        ["project"] = "/home/my_username/projects",
+--			--        ["wiki"]    = "/home/my_username/wiki"
+--			--      }
+--		}
 	},
 	-- other configuration values here
 })
 require("telescope").load_extension("live_grep_args")
-require("telescope").load_extension("frecency")
+--require("telescope").load_extension("frecency")
 local telescope_builtin = require('telescope.builtin')
 -- jm before had
 --vim.keymap.set('n', '<leader>ff', telescope_builtin.find_files, {})
@@ -309,7 +310,7 @@ vim.api.nvim_set_keymap('n', '<leader>ff', '<Cmd>Telescope find_files hidden=tru
 --vim.keymap.set('n', '<leader>fg', telescope_builtin.live_grep, {})
 vim.keymap.set('n', '<leader>rg', require('telescope').extensions.live_grep_args.live_grep_args, {})
 vim.keymap.set('n', '<leader>fb', telescope_builtin.buffers, {})
-vim.keymap.set('n', '<leader>fr', require('telescope').extensions.frecency.frecency, {})
+--vim.keymap.set('n', '<leader>fr', require('telescope').extensions.frecency.frecency, {})
 --vim.api.nvim_set_keymap("n", "<leader>fr", "<Cmd>lua require('telescope').extensions.frecency.frecency()<CR>", {noremap = true, silent = true})
 vim.keymap.set('n', '<leader>fh', telescope_builtin.help_tags, {})
 vim.keymap.set('n', '<leader>fs', telescope_builtin.lsp_workspace_symbols, {})
@@ -317,7 +318,7 @@ vim.keymap.set('n', '<leader>fs', telescope_builtin.lsp_workspace_symbols, {})
 -- Common LSP On Attach function
 local on_attach = function(_, bufnr)
 	local opts = { buffer = bufnr }
-	vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+	--vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
 
 	--vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
 	vim.keymap.set('n', 'gd', telescope_builtin.lsp_definitions, opts)
@@ -338,10 +339,22 @@ local on_attach = function(_, bufnr)
 	vim.keymap.set('n', '<C-M-l>', function() vim.lsp.buf.format { async = true } end, opts)
 end
 
+local on_attach_ts = function(x1, bufnr)
+	on_attach(x1, bufnr)
+	--local opts = { buffer = bufnr }
+	--vim.keymap.set('n', 'gs', tt.TSToolsGoToSourceDefinition, opts)
+	--vim.keymap.set('n', '<C-M-o>', tt.TSToolsOrganizeImports, opts)
+	vim.api.nvim_set_keymap('n', 'gs', '<Cmd>TSToolsGoToSourceDefinition<CR>', kopts)
+	vim.api.nvim_set_keymap('n', '<C-M-o>', '<Cmd>TSToolsOrganizeImports<CR>', kopts)
+end
+
 -- Set up lspconfig.
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-require('lspconfig').tsserver.setup { on_attach = on_attach, capabilities = capabilities }
+-- JM disable, setting up typescript-tools
+--require('lspconfig').tsserver.setup { on_attach = on_attach, capabilities = capabilities }
+require('typescript-tools').setup { on_attach = on_attach_ts, capabilities = capabilities }
+--
 require('lspconfig').pylsp.setup { on_attach = on_attach, capabilities = capabilities }
 require('lspconfig').html.setup { on_attach = on_attach, capabilities = capabilities }
 require('lspconfig').cssls.setup { on_attach = on_attach, capabilities = capabilities }
@@ -404,25 +417,33 @@ require("nightfox").setup {}
 -- : checkhealth nvim-treesitter
 -- seznam podporovanych je tady
 -- https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
---
+-- JM: nejaky exceptions s treesitter:
+--  - mel jsem stary nvim (bin/nvim.appimage)
+--  - udelal jsem kroky viz: 
+--    - https://github.com/nvim-treesitter/nvim-treesitter/issues/3092
+--    - :checkhealth  -- ukazalo problemy
+--    - :TSInstall! vimdoc  --pomohlo s exceptions s vimdoc 
 require 'nvim-treesitter.configs'.setup {
+
 	highlight = {
 		enable = true,
+		disable = { 'lua', 'vimdoc' },
 		-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
 		-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
 		-- Using this option may slow down your editor, and you may see some duplicate highlights.
 		-- Instead of true it can also be a list of languages
 		--  JM TODO speedup
-		additional_vim_regex_highlighting = true,
-	},
-	rainbow = {
-		enable = true,
-		-- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
-		extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
-		max_file_lines = nil, -- Do not enable for files with more than n lines, int
-		-- colors = {}, -- table of hex strings
-		-- termcolors = {} -- table of colour name strings
+		additional_vim_regex_highlighting = false
 	}
+-- jm ts-rainbow -> rainbow-delimiters
+--	rainbow = {
+--		enable = true,
+--		-- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
+--		extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+--		max_file_lines = nil, -- Do not enable for files with more than n lines, int
+--		-- colors = {}, -- table of hex strings
+--		-- termcolors = {} -- table of colour name strings
+--	}
 }
 
 require('nvim-ts-autotag').setup()

@@ -22,6 +22,8 @@ Plug 'MunifTanjim/nui.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'neovim/nvim-lspconfig'
 
+Plug 'pmizio/typescript-tools.nvim'
+
 Plug 'kevinhwang91/nvim-hlslens'
 
 Plug 'williamboman/mason.nvim'
@@ -31,7 +33,6 @@ Plug 'williamboman/mason-lspconfig.nvim'
 ""Plug 'mfussenegger/nvim-dap'
 
 Plug 'windwp/nvim-autopairs'
-Plug 'p00f/nvim-ts-rainbow'
 
 " info o radkach vedle linenum
 " JM jeste dole zapinatko
@@ -41,9 +42,11 @@ Plug 'lewis6991/gitsigns.nvim'
 Plug 'petertriho/nvim-scrollbar'
 
 Plug 'jose-elias-alvarez/null-ls.nvim'
-Plug 'nvim-telescope/telescope.nvim', {'tag':'0.1.1'}
+" JM preditm 0.1.1
+Plug 'nvim-telescope/telescope.nvim', {'tag':'0.1.5'}
 Plug 'nvim-telescope/telescope-live-grep-args.nvim'
-Plug 'nvim-telescope/telescope-frecency.nvim'
+" je to shit
+"Plug 'nvim-telescope/telescope-frecency.nvim'
 Plug 'kkharji/sqlite.lua'
 
 "" zarovka na code actions
@@ -57,11 +60,13 @@ Plug 'RRethy/vim-illuminate'
 
 Plug 'EdenEast/nightfox.nvim'
 Plug 'sainnhe/sonokai'
-"
+" JM  TS
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'mrjones2014/nvim-ts-rainbow'
 Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'windwp/nvim-ts-autotag'
+Plug 'hiphish/rainbow-delimiters.nvim'
+" Plug 'p00f/nvim-ts-rainbow'
+"
 Plug 'm-demare/hlargs.nvim'
 Plug 'folke/twilight.nvim'
 

@@ -23,6 +23,7 @@ import XMonad.Layout.Fullscreen
 import XMonad.Layout.Tabbed
 import XMonad.Layout.SimpleFloat
 import XMonad.Actions.CycleWS
+import XMonad.Prompt (XPConfig (..), font, height, position)
 
 --import XMonad.Actions.GridSelect  
 import Data.Ratio ((%))  
@@ -32,6 +33,9 @@ import System.IO
 
 myExtraWorkspaces = [(xK_0, "0"),(xK_minus, "-"),(xK_equal, "=")]
 myWorkspaces  = ["1","2","3","4","5","6","7","8","9"]  ++ (map snd myExtraWorkspaces)
+
+myXPConfig :: XPConfig
+myXPConfig = def { font = "xft:terminus:size=16:antialias=false", height = 30 }
 
 myLayout = 
 --onWorkspaces ["9"] tabbedLayout $
@@ -111,7 +115,7 @@ main = do
     --
     -- tohle  na prejmenovavani workspaces, ale ted nefunguje, protoze to neumim 
     -- zobrazit v xmobaru nahore (mozna potrebuju xmonad 0.17)
-    , ((mod3Mask, xK_r ), XMonad.Actions.WorkspaceNames.renameWorkspace def)
+    , ((mod3Mask, xK_r ), XMonad.Actions.WorkspaceNames.renameWorkspace myXPConfig)
 
     , ((mod1Mask, xK_Tab), windows W.focusDown)
     ] ++ [
