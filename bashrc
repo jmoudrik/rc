@@ -40,9 +40,6 @@ alias grep="grep --color=auto"
 alias txts="txts --color-always -R"
 alias num_stats='python3 -m jmpy.num_stats'
 
-alias ssh_tunel="autossh -D 127.0.0.1:10003 j2m -N &"
-alias cdms="cd /home/jm/remote/afs/ms/u/m/moudj6am/"
-
 alias seznam="ping www.seznam.cz"
 #alias ls="eza -X --color=always"
 alias ll="ls -l"
