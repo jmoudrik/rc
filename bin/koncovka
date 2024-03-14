@@ -1,0 +1,14 @@
+#!/bin/sh
+
+#for a in `seq 3` ; do
+#mplayer ~/music/trumpeta_nice.ogg > /dev/null 2> /dev/null
+#done
+
+for a in `seq 1` ; do
+	mplayer ~/music/kus_koncovky.wav > /dev/null 2> /dev/null
+	ret=$?
+	sleep 0.5
+done
+
+exit $ret
+

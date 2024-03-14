@@ -9,7 +9,7 @@ pepovo_rozlozeni.sh
 #  WM
 #
 
-trayer --edge top --align left --SetDockType true --SetPartialStrut true --expand true --width 6 --transparent true --alpha 0 --tint 0x000000 --height 20 --monitor primary &
+trayer --edge top --align left --SetDockType true --SetPartialStrut true --expand true --width 7 --transparent true --alpha 0 --tint 0x000000 --height 20 --monitor primary &
 #feh --bg-scale ~/obrazky/jumping-fox-HD.jpg &
 #feh --bg-scale ~/obrazky/Best-Cat-Wallpaper.jpg &
 #feh --bg-scale ~/obrazky/carina_nebula_jwst_2022.jpg &
@@ -27,7 +27,7 @@ deluge &
 #autossh -D 127.0.0.1:10003 j2m -N &
 xscreensaver -no-splash &
 birdtray &
-blueman-tray &
+blueman-applet &
 log_bat.sh > /dev/null &
 
 #

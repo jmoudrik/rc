@@ -1,0 +1,9 @@
+#!/bin/sh
+# because of th run from within mc
+#unset MC_SID
+
+#echo "$@" >> ~/ARGS
+
+[ "$#" = '0' ] && term &
+
+term --working-directory "$(dirname "$1")"
