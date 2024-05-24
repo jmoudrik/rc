@@ -27,7 +27,9 @@ deluge &
 #autossh -D 127.0.0.1:10003 j2m -N &
 xscreensaver -no-splash &
 birdtray &
-blueman-applet &
+# tohle neni potreba pro to aby fungoval BT, jen pro nastavovani novych devices
+# navic to porad spamuje connected/disconnected msgs
+#blueman-applet &
 log_bat.sh > /dev/null &
 
 #

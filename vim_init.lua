@@ -60,7 +60,7 @@ end, {})
 -- mozna lepsi
 require("codegpt.config")
 vim.g["codegpt_commands"] = {
-		["explain"] = {
+	["explain"] = {
 		callback_type = "code_popup",
 	},
 }
@@ -119,11 +119,13 @@ require("mason-lspconfig").setup()
 local null_ls = require("null-ls")
 null_ls.setup({
 	sources = {
-		null_ls.builtins.formatting.autopep8,
 		null_ls.builtins.formatting.eslint,
 		null_ls.builtins.diagnostics.eslint,
 		null_ls.builtins.code_actions.eslint,
+		--null_ls.builtins.formatting.autopep8,
 		--null_ls.builtins.completion.spell,
+		--null_ls.builtins.diagnostics.ruff,
+		--null_ls.builtins.formatting.black,
 	},
 })
 
@@ -203,7 +205,7 @@ cmp.setup({
 		--				fallback()
 		--			end
 		--		end, { "i", "s", "c", }),
-			["<Tab>"] = cmp.mapping(function(fallback)
+		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
 			elseif vim.fn["vsnip#available"](1) == 1 then
@@ -214,7 +216,7 @@ cmp.setup({
 				fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
 			end
 		end, { "i", "s" }),
-			["<S-Tab>"] = cmp.mapping(function()
+		["<S-Tab>"] = cmp.mapping(function()
 			if cmp.visible() then
 				cmp.select_prev_item()
 			elseif vim.fn["vsnip#jumpable"](-1) == 1 then
@@ -223,10 +225,10 @@ cmp.setup({
 		end, { "i", "s" }),
 		--['<C-b>'] = cmp.mapping.scroll_docs(-4),
 		--['<C-f>'] = cmp.mapping.scroll_docs(4),
-			['<C-Space>'] = cmp.mapping.complete(),
-			['<C-e>'] = cmp.mapping.abort(),
+		['<C-Space>'] = cmp.mapping.complete(),
+		['<C-e>'] = cmp.mapping.abort(),
 		-- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-			['<CR>'] = cmp.mapping.confirm({ select = true }),
+		['<CR>'] = cmp.mapping.confirm({ select = true }),
 	}),
 	sources = cmp.config.sources({
 		{ name = 'nvim_lsp' },
@@ -283,20 +285,20 @@ require('telescope').setup({
 	},
 	extensions = {
 		-- jM disable is BS
---		frecency = {
---			default_workspace = 'CWD',
---			--db_root = "home/my_username/path/to/db_root",
---			--show_scores = false,
---			show_unindexed = false,
---			--ignore_patterns = {"*.git/*", "*/tmp/*"},
---			disable_devicons = false,
---			--      workspaces = {
---			--        ["conf"]    = "/home/my_username/.config",
---			--        ["data"]    = "/home/my_username/.local/share",
---			--        ["project"] = "/home/my_username/projects",
---			--        ["wiki"]    = "/home/my_username/wiki"
---			--      }
---		}
+		--		frecency = {
+		--			default_workspace = 'CWD',
+		--			--db_root = "home/my_username/path/to/db_root",
+		--			--show_scores = false,
+		--			show_unindexed = false,
+		--			--ignore_patterns = {"*.git/*", "*/tmp/*"},
+		--			disable_devicons = false,
+		--			--      workspaces = {
+		--			--        ["conf"]    = "/home/my_username/.config",
+		--			--        ["data"]    = "/home/my_username/.local/share",
+		--			--        ["project"] = "/home/my_username/projects",
+		--			--        ["wiki"]    = "/home/my_username/wiki"
+		--			--      }
+		--		}
 	},
 	-- other configuration values here
 })
@@ -355,7 +357,29 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 --require('lspconfig').tsserver.setup { on_attach = on_attach, capabilities = capabilities }
 require('typescript-tools').setup { on_attach = on_attach_ts, capabilities = capabilities }
 --
-require('lspconfig').pylsp.setup { on_attach = on_attach, capabilities = capabilities }
+require('lspconfig').ruff_lsp.setup { on_attach = on_attach, capabilities = capabilities }
+require('lspconfig').pyright.setup {
+	on_attach = on_attach,
+	capabilities = capabilities,
+	filetypes = { "python" },
+	settings = {
+		pyright = {
+			disableOrganizeImports = true, -- Using Ruff
+			disableTaggedHints = true, -- Using Ruff
+		},
+		python = {
+			analysis = {
+				diagnosticSeverityOverrides = {
+					-- https://github.com/microsoft/pyright/blob/main/docs/configuration.md#type-check-diagnostics-settings
+					--reportUndefinedVariable = "none",
+				},
+				--ignore = { '*' }, -- Using Ruff
+				--typeCheckingMode = 'off', -- Using mypy
+			},
+		},
+	},
+
+}
 require('lspconfig').html.setup { on_attach = on_attach, capabilities = capabilities }
 require('lspconfig').cssls.setup { on_attach = on_attach, capabilities = capabilities }
 require('lspconfig').jsonls.setup { on_attach = on_attach, capabilities = capabilities }
@@ -419,10 +443,10 @@ require("nightfox").setup {}
 -- https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
 -- JM: nejaky exceptions s treesitter:
 --  - mel jsem stary nvim (bin/nvim.appimage)
---  - udelal jsem kroky viz: 
+--  - udelal jsem kroky viz:
 --    - https://github.com/nvim-treesitter/nvim-treesitter/issues/3092
 --    - :checkhealth  -- ukazalo problemy
---    - :TSInstall! vimdoc  --pomohlo s exceptions s vimdoc 
+--    - :TSInstall! vimdoc  --pomohlo s exceptions s vimdoc
 require 'nvim-treesitter.configs'.setup {
 
 	highlight = {
@@ -435,15 +459,15 @@ require 'nvim-treesitter.configs'.setup {
 		--  JM TODO speedup
 		additional_vim_regex_highlighting = false
 	}
--- jm ts-rainbow -> rainbow-delimiters
---	rainbow = {
---		enable = true,
---		-- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
---		extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
---		max_file_lines = nil, -- Do not enable for files with more than n lines, int
---		-- colors = {}, -- table of hex strings
---		-- termcolors = {} -- table of colour name strings
---	}
+	-- jm ts-rainbow -> rainbow-delimiters
+	--	rainbow = {
+	--		enable = true,
+	--		-- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
+	--		extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+	--		max_file_lines = nil, -- Do not enable for files with more than n lines, int
+	--		-- colors = {}, -- table of hex strings
+	--		-- termcolors = {} -- table of colour name strings
+	--	}
 }
 
 require('nvim-ts-autotag').setup()

@@ -60,6 +60,7 @@ myManageHook = composeAll
      [
      isFullscreen --> doFullFloat
      , title =? "htopterm" --> doShift "9"  
+	 --, (className =? "Kazam" <&&> title =? "Kazam") --> doIgnore
      ]
 
 myLogHook pipe = workspaceNamesPP xmobarPP {
